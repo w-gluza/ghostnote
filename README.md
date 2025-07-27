@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🥁 GhostNote MVP – Fullstack Project Checklist
 
-## Getting Started
+A fullstack groove recognition quiz app — a fun project to level up my backend skills (and improve my listening skills 👂).
 
-First, run the development server:
+This checklist reflects the ideation process behind an app I'm building to support my drum learning journey - something fun and interactive to play with while commuting (or procrastinating 😅). The direction might evolve a bit as I experiment!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧠 PHASE 1 – Foundation (Project Setup)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [x] Setup Next.js project
+- [x] Set up Prisma ORM + Supabase Postgres
+- [x] Create base folder structure
+- [x] Create initial quiz API route
+- [x] Set up ESLint and Prettier
+- [x] GitHub Repository
+- [x] Vercel Deployment
+- [ ] Set up Supabase Auth
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🎮 PHASE 2 – Quiz Gameplay
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] Define quiz data model (audio URL, options, correctIndex)
+- [ ] Load pattern/audio from backend via `/api/quiz`
+- [ ] Display audio player + pattern grid (16 steps)
+- [ ] Let user choose from 4 pattern options
+- [ ] POST answer to `/api/answer` → receive XP
+- [ ] Show correct/incorrect feedback visually
+- [ ] Support keyboard input (1–4 keys to answer)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧑‍💻 PHASE 3 – Backend Core Logic
 
-## Deploy on Vercel
+- [ ] Store user quiz results in DB
+- [ ] XP system: +10 XP for correct answers
+- [ ] Level system: unlock levels by XP milestones
+- [ ] Add error handling for API routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👤 PHASE 4 – User System
+
+- [ ] User register/login with Supabase
+- [ ] Store user XP, level, avatar in DB
+- [ ] Show logged-in user in navbar/header
+- [ ] Profile screen (`/me`) with XP + avatar
+- [ ] Redirect unauthenticated users from quiz
+
+---
+
+## 🎨 PHASE 5 – UI Polish & Fun
+
+- [ ] Show XP bar or progress circle
+- [ ] Unlock avatar cosmetics by level
+- [ ] Add drum skin themed grid background
+- [ ] Animate correct/wrong answer feedback
+- [ ] Add SVG icons
+
+---
+
+## 🚀 PHASE 6 – Stretch Goals
+
+- [ ] Multiplayer mode with WebSocket
+- [ ] Leaderboards
+- [ ] Pattern builder tool
