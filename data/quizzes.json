@@ -1,0 +1,20 @@
+[
+  {
+    "id": "rock-basic",
+    "audioUrl": "/audio/rock1.mp3",
+    "options": ["Rock 1", "Funk Groove", "Jazz Waltz", "HipHop Beat"],
+    "correct": 0
+  },
+  {
+    "id": "funky-fill",
+    "audioUrl": "/audio/funk1.mp3",
+    "options": ["Disco Fill", "Funk Groove", "Trap Hat", "Swing Shuffle"],
+    "correct": 1
+  },
+  {
+    "id": "hiphop-snare",
+    "audioUrl": "/audio/hiphop1.mp3",
+    "options": ["Jazz 4", "Funk Pop", "Boom Bap", "Reggae"],
+    "correct": 2
+  }
+]
