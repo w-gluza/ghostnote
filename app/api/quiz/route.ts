@@ -1,4 +1,4 @@
-import quizzes from "@/data/quizzes.json";
+import quizzes from "../../../data/quizzes.json";
 import { NextResponse } from "next/server";
 
 export async function GET() {
