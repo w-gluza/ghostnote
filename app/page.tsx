@@ -1,4 +1,4 @@
 const page = () => {
-  return <div>The Ghost note App</div>;
+  return <div>The Ghost Note App </div>;
 };
 export default page;
