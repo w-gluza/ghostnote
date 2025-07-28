@@ -8,9 +8,31 @@ datasource db {
 }
 
 model User {
-  id     String @id @default(uuid())
-  email  String @unique
-  nick   String @unique
-  xp     Int    @default(0)
-  level  Int    @default(1)
+  id      String       @id @default(uuid())
+  email   String       @unique
+  nick    String       @unique
+  xp      Int          @default(0)
+  level   Int          @default(1)
+  quizzes QuizResult[]
+}
+
+model Quiz {
+  id           String       @id @default(uuid())
+  audioUrl     String
+  pattern      String // correct pattern
+  correctIndex Int
+  options      String[] // all 4 pattern choices
+  createdAt    DateTime     @default(now())
+  results      QuizResult[]
+}
+
+model QuizResult {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quizId    String
+  isCorrect Boolean
+  xpGained  Int
+  createdAt DateTime @default(now())
 }
