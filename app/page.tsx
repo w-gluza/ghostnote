@@ -1,13 +1,12 @@
-import { createClient } from "@/utils/supabase/client";
+import Users from "./Users";
 
-export default async function Instruments() {
-  const supabase = createClient();
-  const { data: instruments, error } = await supabase
-    .from("instruments")
-    .select();
+const page = () => {
+  return (
+    <>
+      <div>The Ghost Note</div>
+      <Users />
+    </>
+  );
+};
 
-  if (error) return <p>Error loading instruments: {error.message}</p>;
-  if (!instruments) return <p>No instruments found.</p>;
-
-  return <pre>{JSON.stringify(instruments, null, 2)}</pre>;
-}
+export default page;
