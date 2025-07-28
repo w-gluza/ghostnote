@@ -1,20 +1,27 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.ts";
 
 async function main() {
-  await prisma.user.create({
-    data: {
+  await prisma.user.upsert({
+    where: { email: "test@example.com" },
+    update: {
+      xp: 90,
+      level: 1,
+      nick: "user_1",
+    },
+    create: {
       email: "test@example.com",
       nick: "user_1",
       xp: 100,
-      level: 2,
+      level: 1,
     },
   });
 }
 
 main()
-  .then(() => prisma.$disconnect())
   .catch((e) => {
     console.error(e);
-    prisma.$disconnect();
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });

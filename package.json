@@ -6,8 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:migrate": "prisma migrate dev --schema=prisma/schema.prisma",
+    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema=prisma/schema.prisma",
+    "prisma:seed": "ts-node --esm prisma/seed.ts"
   },
+  "prisma": {
+    "seed": "ts-node --esm prisma/seed.ts"
+  },
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^6.12.0",
     "@supabase/ssr": "^0.6.1",

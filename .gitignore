@@ -45,3 +45,10 @@ next-env.d.ts
 # vscode
 .vscode
 /generated/prisma
+
+# Ignore generated client
+/node_modules/.prisma
+prisma/dev.db
+
+# Prisma generated folders (safe to keep client though)
+*.log
