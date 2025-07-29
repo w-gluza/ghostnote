@@ -1,12 +1,7 @@
-import Users from "./Users";
+import LandingPage from "./components/landing-page/LandingPage";
 
 const page = () => {
-  return (
-    <>
-      <div>The Ghost Note</div>
-      <Users />
-    </>
-  );
+  return <LandingPage />;
 };
 
 export default page;
