@@ -2,6 +2,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useState } from "react";
 import styles from "./Quiz.module.css";
+import PatternCard from "@/app/common/PatternCard/PatternCard";
+import type { MidiNoteValue, VelocityValue } from "@/app/utils/midiMap";
 
 interface Question {
   question: string;
@@ -48,8 +50,34 @@ const Quiz = () => {
     }
   };
 
+  const pattern: Array<[MidiNoteValue, VelocityValue][]> = [
+    [
+      [36, 100],
+      [42, 100],
+    ],
+    [[42, 100]],
+    [
+      [38, 100],
+      [42, 100],
+    ],
+    [[42, 100]],
+
+    [
+      [42, 100],
+      [36, 100],
+    ],
+    [[42, 100]],
+    [
+      [38, 100],
+      [42, 100],
+    ],
+
+    [[42, 100]],
+  ];
+
   return (
     <div className={styles.container}>
+      <PatternCard bpm={120} timeSignature={"4/4"} pattern={pattern} />
       <h1 className={styles.h1}>Quiz</h1>
 
       {isFinished ? (
