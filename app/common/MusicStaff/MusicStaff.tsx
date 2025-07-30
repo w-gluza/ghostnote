@@ -46,6 +46,8 @@ const MusicStaff: React.FC<MusicStaffProps> = ({
               row={midiPositionMap[midi]}
               column={stepIndex + 3}
               velocity={velocity}
+              midi={midi}
+              visualMode="svg"
             />
           ))
         )}
@@ -57,6 +59,8 @@ const MusicStaff: React.FC<MusicStaffProps> = ({
               row={midiPositionMap[midi]}
               column={stepIndex + 3 + 9}
               velocity={velocity}
+              midi={midi}
+              visualMode="svg"
             />
           ))
         )}

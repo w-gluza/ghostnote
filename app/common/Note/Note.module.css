@@ -1,8 +1,51 @@
 .note {
+  position: relative;
   width: var(--note-width);
   height: var(--note-height);
-  background-color: black;
-  border-radius: 50% / 45%;
   align-self: center;
   justify-self: center;
+}
+
+/* Dot style (default for toms/kick/snare) */
+.dot {
+  background-color: var(--color-black-800);
+  border-radius: 50% / 50%;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  opacity: 0.85;
+}
+/* X style (for cymbals/hi-hat) */
+.x {
+  background: none;
+  position: relative;
+}
+
+.x::before,
+.x::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 1px;
+  background-color: var(--color-black-800);
+  opacity: 0.8;
+  border-radius: 1px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.x::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.x::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* SVG style container */
+.svg {
+  background: none;
+}
+
+.icon {
+  object-fit: contain;
 }
