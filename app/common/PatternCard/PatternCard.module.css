@@ -1,0 +1,29 @@
+.card {
+  border: 2px solid var(--color-gray-300);
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--color-white);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card:hover {
+  border-color: var(--color-gray-600);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.selected {
+  border-color: var(--color-black);
+  box-shadow: 0 0 0 2px var(--color-black);
+}
+
+.label {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}

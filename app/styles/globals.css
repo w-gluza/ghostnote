@@ -11,10 +11,15 @@
 
   /* Color Variables */
   --color-black: #222222;
+  --color-black-800: #2a2a2a;
   --color-white: #fafafa;
   --color-gray-700: #444444;
   --color-gray-600: #666666;
   --color-gray-300: #dddddd;
+
+  --row-height: 10px;
+  --note-height: calc(var(--row-height) * 2);
+  --note-width: calc(var(--note-height) * 1.4);
 }
 
 body {

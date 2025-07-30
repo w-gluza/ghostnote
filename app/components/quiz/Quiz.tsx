@@ -1,48 +1,33 @@
 "use client";
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useState } from "react";
 import styles from "./Quiz.module.css";
-
-interface Question {
-  question: string;
-  options: string[];
-  correctAnswer: string;
-}
-
-const quizData: Question[] = [
-  {
-    question: "What is the capital of France?",
-    options: ["Berlin", "Madrid", "Paris", "Rome"],
-    correctAnswer: "Paris",
-  },
-  {
-    question: "Which planet is known as the Red Planet?",
-    options: ["Earth", "Mars", "Venus", "Jupiter"],
-    correctAnswer: "Mars",
-  },
-  {
-    question: 'Who wrote "To Kill a Mockingbird"?',
-    options: ["Harper Lee", "Jane Austen", "Mark Twain", "Ernest Hemingway"],
-    correctAnswer: "Harper Lee",
-  },
-];
+import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
+import { quizData } from "@/app/data/quizPatterns";
+import PatternCard from "@/app/common/PatternCard/PatternCard";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
   const question = quizData[currentQuestion];
 
+  const handleSelect = (index: number) => {
+    setSelectedIndex(index);
+  };
+
   const handleSubmit = () => {
-    if (selectedOption === question.correctAnswer) {
-      setScore((prev) => prev + 1);
+    if (
+      selectedIndex !== null &&
+      question.options[selectedIndex].label === question.correctAnswerLabel
+    ) {
+      setScore((s) => s + 1);
     }
 
     if (currentQuestion + 1 < quizData.length) {
-      setCurrentQuestion((prev) => prev + 1);
-      setSelectedOption(null);
+      setCurrentQuestion((q) => q + 1);
+      setSelectedIndex(null);
     } else {
       setIsFinished(true);
     }
@@ -50,44 +35,52 @@ const Quiz = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>Quiz</h1>
+      <h1 className={styles.heading}>🎵 Groove Recognition Quiz</h1>
 
-      {isFinished ? (
-        <div className={styles.result}>
-          <h2>Quiz Completed!</h2>
-          <p>
-            Your score: {score} / {quizData.length}
+      {!isFinished && (
+        <>
+          <p className={styles.instruction}>
+            Listen to the pattern and select the matching visual.
           </p>
-        </div>
-      ) : (
-        <div>
+
+          <audio controls src={question.audioUrl} className={styles.audio} />
+
           <h2 className={styles.question}>{question.question}</h2>
-          <ul className={styles.options}>
-            {question.options.map((opt, index) => {
-              const inputId = `q${currentQuestion}-opt${index}`;
-              return (
-                <li key={opt} className={styles.option}>
-                  <input
-                    type="radio"
-                    id={inputId}
-                    name={`question-${currentQuestion}`}
-                    value={opt}
-                    checked={selectedOption === opt}
-                    onChange={() => setSelectedOption(opt)}
-                  />
-                  <label htmlFor={inputId}>{opt}</label>
-                </li>
-              );
-            })}
-          </ul>
+
+          <div className={styles.grid}>
+            {question.options.map((option, index) => (
+              <PatternCard
+                key={option.label}
+                label={option.label}
+                selected={selectedIndex === index}
+                onSelect={() => handleSelect(index)}
+              >
+                <MusicStaff
+                  pattern={option.pattern}
+                  tempo={120}
+                  timeSignature={[4, 4]}
+                />
+              </PatternCard>
+            ))}
+          </div>
 
           <button
-            className={styles.button}
             onClick={handleSubmit}
-            disabled={!selectedOption}
+            className={styles.submit}
+            disabled={selectedIndex === null}
           >
-            {currentQuestion + 1 === quizData.length ? "Finish" : "Next"}
+            {currentQuestion + 1 === quizData.length ? "Finish Quiz" : "Next"}
           </button>
+        </>
+      )}
+
+      {isFinished && (
+        <div className={styles.result}>
+          <h2>🎉 Quiz Completed!</h2>
+          <p>
+            You scored <strong>{score}</strong> out of{" "}
+            <strong>{quizData.length}</strong>
+          </p>
         </div>
       )}
     </div>
