@@ -3,7 +3,7 @@ export type MidiNoteValue =
   | 38 // Snare Drum
   | 41 // Floor Tom
   | 45 // Tom 2 (Low Tom)
-  | 48 // Tom 1 (High Tom / Rack Tom)
+  | 48 // Tom 1 (High Tom)
   | 42 // Hi-Hat (Closed)
   | 49 // Crash Cymbal
   | 51; // Ride Cymbal
@@ -19,31 +19,18 @@ export const midiNoteMap: Record<MidiNoteValue, string> = {
   51: "Ride Cymbal",
 };
 
-export const midiPositionMap: Record<number, number> = {
-  // Crash cymbal
-  49: 1,
-
-  // Closed Hi-Hat
-  42: 1,
-
-  // Ride cymbal
-  51: 2,
-
-  // Snare Drum
-  38: 5,
-
-  // Rack Tom 1
-  48: 3,
-
-  // Rack Tom 2
-  45: 4,
-
-  // Floor Tom 3
-  41: 7,
-
-  // Bass Drum (Kick): Bottom space below staff
-  36: 9,
+export const midiPositionMap: Record<MidiNoteValue, number> = {
+  36: 9, // Bass Drum
+  38: 5, // Snare Drum
+  41: 7, // Floor Tom
+  45: 4, // Tom 2
+  48: 3, // Tom 1
+  42: 1, // Hi-Hat
+  49: 1, // Crash Cymbal (same row as Hi-Hat for now)
+  51: 2, // Ride Cymbal
 };
+
+export type VelocityValue = 127 | 100 | 64 | 30;
 
 export const velocityLabelMap: Record<VelocityValue, string> = {
   127: "Accent",
@@ -59,8 +46,6 @@ export function getMidiPosition(note: MidiNoteValue): number {
 export function getMidiNoteName(note: MidiNoteValue): string {
   return midiNoteMap[note];
 }
-
-export type VelocityValue = 127 | 100 | 64 | 30;
 
 export function getVelocityLabel(velocity: VelocityValue): string {
   return velocityLabelMap[velocity];
