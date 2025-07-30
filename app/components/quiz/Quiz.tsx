@@ -58,7 +58,7 @@ const Quiz = () => {
                 <MusicStaff
                   pattern={option.pattern}
                   tempo={120}
-                  timeSignature="4/4"
+                  timeSignature={[4, 4]}
                 />
               </PatternCard>
             ))}

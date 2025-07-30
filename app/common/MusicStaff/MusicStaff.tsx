@@ -10,38 +10,45 @@ import {
 interface MusicStaffProps {
   pattern: Array<[MidiNoteValue, VelocityValue][]>;
   tempo: number;
-  timeSignature: string; // e.g., "4/4", "6/8"
+  timeSignature: [number, number]; // e.g., "4/4", "6/8"
 }
 
 const MusicStaff: React.FC<MusicStaffProps> = ({
   pattern,
   tempo,
   timeSignature,
-}) => (
-  <>
-    <p>Tempo: {tempo}</p>
-    <p>Time Signature: {timeSignature}</p>
+}) => {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.meta}>
+        <span>
+          {timeSignature[0]} / {timeSignature[1]}
+        </span>
+        <span>♪ = {tempo}</span>
+      </div>
 
-    <div className={styles.staff}>
-      {/* Staff lines */}
-      <div className={styles.line} />
-      <div className={styles.line} />
-      <div className={styles.line} />
-      <div className={styles.line} />
-      <div className={styles.line} />
+      <div className={styles.staff}>
+        {/* Staff lines */}
+        <div className={styles.line} />
+        <div className={styles.line} />
+        <div className={styles.line} />
+        <div className={styles.line} />
+        <div className={styles.line} />
 
-      {/* Notes */}
-      {pattern.map((notesInStep, stepIndex) =>
-        notesInStep.map(([midi, velocity], i) => (
-          <Note
-            key={`${stepIndex}-${midi}-${i}`}
-            row={midiPositionMap[midi]}
-            column={stepIndex + 1}
-            velocity={velocity}
-          />
-        ))
-      )}
+        {/* Notes */}
+        {pattern.map((notesInStep, stepIndex) =>
+          notesInStep.map(([midi, velocity], i) => (
+            <Note
+              key={`${stepIndex}-${midi}-${i}`}
+              row={midiPositionMap[midi]}
+              column={stepIndex + 1}
+              velocity={velocity}
+            />
+          ))
+        )}
+      </div>
     </div>
-  </>
-);
+  );
+};
+
 export default MusicStaff;
