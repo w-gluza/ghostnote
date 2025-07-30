@@ -2,13 +2,14 @@
 import { useState } from "react";
 import styles from "./Quiz.module.css";
 import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
-import { quizData } from "../../data/quizPatterns";
+import { quizData } from "@/app/data/quizPatterns";
+import PatternCard from "@/app/common/PatternCard/PatternCard";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
   const [score, setScore] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   const question = quizData[currentQuestion];
 
@@ -21,57 +22,64 @@ const Quiz = () => {
       selectedIndex !== null &&
       question.options[selectedIndex].label === question.correctAnswerLabel
     ) {
-      setScore((prev) => prev + 1);
+      setScore((s) => s + 1);
     }
 
     if (currentQuestion + 1 < quizData.length) {
-      setCurrentQuestion((prev) => prev + 1);
+      setCurrentQuestion((q) => q + 1);
       setSelectedIndex(null);
     } else {
       setIsFinished(true);
     }
   };
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>
-        Listen to the groove and select the correct pattern
-      </h1>
+      <h1 className={styles.heading}>🎵 Groove Recognition Quiz</h1>
 
-      {/* 🎵 Insert audio player or playback trigger here */}
-      <button className={styles.playButton}>🔊 Play Pattern</button>
+      {!isFinished && (
+        <>
+          <p className={styles.instruction}>
+            Listen to the pattern and select the matching visual.
+          </p>
 
-      <div className={styles.optionsGrid}>
-        {question.options.map((option, index) => (
-          <div
-            key={option.label}
-            className={`${styles.optionCard} ${
-              selectedIndex === index ? styles.selected : ""
-            }`}
-            onClick={() => handleSelect(index)}
-          >
-            <span className={styles.optionLabel}>{option.label}</span>
-            <MusicStaff
-              pattern={option.pattern}
-              tempo={120}
-              timeSignature="4/4"
-            />
+          <audio controls src={question.audioUrl} className={styles.audio} />
+
+          <h2 className={styles.question}>{question.question}</h2>
+
+          <div className={styles.grid}>
+            {question.options.map((option, index) => (
+              <PatternCard
+                key={option.label}
+                label={option.label}
+                selected={selectedIndex === index}
+                onSelect={() => handleSelect(index)}
+              >
+                <MusicStaff
+                  pattern={option.pattern}
+                  tempo={120}
+                  timeSignature="4/4"
+                />
+              </PatternCard>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <button
-        onClick={handleSubmit}
-        className={styles.button}
-        disabled={selectedIndex === null}
-      >
-        {currentQuestion + 1 === quizData.length ? "Finish" : "Next"}
-      </button>
+          <button
+            onClick={handleSubmit}
+            className={styles.submit}
+            disabled={selectedIndex === null}
+          >
+            {currentQuestion + 1 === quizData.length ? "Finish Quiz" : "Next"}
+          </button>
+        </>
+      )}
 
       {isFinished && (
         <div className={styles.result}>
-          <h2>Quiz Completed!</h2>
+          <h2>🎉 Quiz Completed!</h2>
           <p>
-            Your score: {score} / {quizData.length}
+            You scored <strong>{score}</strong> out of{" "}
+            <strong>{quizData.length}</strong>
           </p>
         </div>
       )}
