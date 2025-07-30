@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useState } from "react";
 import styles from "./Quiz.module.css";
 import PatternCard from "@/app/common/PatternCard/PatternCard";
 import type { MidiNoteValue, VelocityValue } from "@/app/utils/midiMap";
+import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
 
 interface Question {
   question: string;
@@ -77,7 +79,8 @@ const Quiz = () => {
 
   return (
     <div className={styles.container}>
-      <PatternCard bpm={120} timeSignature={"4/4"} pattern={pattern} />
+      <MusicStaff></MusicStaff>
+      {/* <PatternCard bpm={120} timeSignature={"4/4"} pattern={pattern} /> */}
       <h1 className={styles.h1}>Quiz</h1>
 
       {isFinished ? (

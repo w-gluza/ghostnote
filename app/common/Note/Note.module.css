@@ -1,0 +1,8 @@
+.note {
+  width: var(--note-width);
+  height: var(--note-height);
+  background-color: black;
+  border-radius: 50% / 45%;
+  align-self: center;
+  justify-self: center;
+}

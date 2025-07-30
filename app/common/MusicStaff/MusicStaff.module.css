@@ -1,10 +1,11 @@
 .staff {
   display: grid;
   /* 5 lines × 2 rows + 2 extra for notes above/below */
-  grid-template-rows: repeat(12, 1fr);
-  height: 120px;
+  grid-template-rows: repeat(12, var(--row-height));
+  grid-template-columns: repeat(16, 1fr);
+  height: calc(var(--row-height) * 12);
   width: 100%;
-  background-color: white;
+  background-color: var(--color-white);
   position: relative;
 }
 
