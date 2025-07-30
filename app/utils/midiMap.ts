@@ -1,49 +1,48 @@
 export type MidiNoteValue =
   | 36 // Bass Drum
-  | 41 // Floor Tom
   | 38 // Snare Drum
-  | 48 // Rack Tom
+  | 41 // Floor Tom
+  | 45 // Tom 2 (Low Tom)
+  | 48 // Tom 1 (High Tom / Rack Tom)
   | 42 // Hi-Hat (Closed)
   | 49 // Crash Cymbal
-  | 51 // Ride Cymbal
-  | 55 // Splash Cymbal
-  | 52; // China Cymbal
+  | 51; // Ride Cymbal
 
 export const midiNoteMap: Record<MidiNoteValue, string> = {
   36: "Bass Drum",
-  41: "Floor Tom",
   38: "Snare Drum",
-  48: "Rack Tom",
+  41: "Floor Tom",
+  45: "Tom 2 (Low Rack Tom)",
+  48: "Tom 1 (High Rack Tom)",
   42: "Hi-Hat (Closed)",
   49: "Crash Cymbal",
   51: "Ride Cymbal",
-  55: "Splash Cymbal",
-  52: "China Cymbal",
 };
 
-export const midiPositionMap: Record<MidiNoteValue, number> = {
-  // 🎶 Above the top line
-  49: 1, // Crash Cymbal (space above line 5)
-  55: 1, // Splash Cymbal (same zone)
-  52: 1, // China Cymbal
+export const midiPositionMap: Record<number, number> = {
+  // Crash cymbal
+  49: 1,
 
-  // 🥁 Line 5 (top line)
-  42: 2, // Hi-Hat (Closed)
+  // Closed Hi-Hat
+  42: 1,
 
-  // 🎶 Space between lines 5 and 4
-  51: 3, // Ride Cymbal
+  // Ride cymbal
+  51: 2,
 
-  // 🥁 Line 4
-  38: 4, // Snare Drum
+  // Snare Drum
+  38: 5,
 
-  // 🎶 Space between lines 4 and 3
-  48: 5, // Rack Tom
+  // Rack Tom 1
+  48: 3,
 
-  // 🥁 Line 3 (middle line)
-  41: 6, // Floor Tom
+  // Rack Tom 2
+  45: 4,
 
-  // 🎶 Space below bottom line (Line 1)
-  36: 9, // Bass Drum
+  // Floor Tom 3
+  41: 7,
+
+  // Bass Drum (Kick): Bottom space below staff
+  36: 9,
 };
 
 export const velocityLabelMap: Record<VelocityValue, string> = {
