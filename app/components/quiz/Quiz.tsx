@@ -79,8 +79,7 @@ const Quiz = () => {
 
   return (
     <div className={styles.container}>
-      <MusicStaff></MusicStaff>
-      {/* <PatternCard bpm={120} timeSignature={"4/4"} pattern={pattern} /> */}
+      <MusicStaff pattern={pattern} tempo={120} timeSignature="4/4" />
       <h1 className={styles.h1}>Quiz</h1>
 
       {isFinished ? (

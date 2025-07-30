@@ -21,14 +21,14 @@ export const midiNoteMap: Record<MidiNoteValue, string> = {
 };
 
 export const midiPositionMap: Record<MidiNoteValue, number> = {
-  49: 1, // Crash Cymbal (top row)
-  51: 2, // Ride Cymbal
+  49: 1, // Crash Cymbal
+  51: 4, // Ride Cymbal
   42: 3, // Hi-Hat (Closed)
-  48: 4, // Rack Tom 1 (High Tom)
-  47: 5, // Rack Tom 2 (Mid Tom)
-  38: 6, // Snare Drum
-  45: 8, // Floor Tom
-  36: 11, // Bass Drum (bottom row)
+  48: 5, // Rack Tom 1 (High Tom)
+  47: 6, // Rack Tom 2 (Mid Tom)
+  38: 7, // Snare Drum
+  45: 9, // Floor Tom
+  36: 11, // Bass Drum
 };
 
 export type VelocityValue = 127 | 100 | 64 | 30;
