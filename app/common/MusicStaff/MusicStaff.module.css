@@ -1,21 +1,31 @@
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+  margin-bottom: 0.25rem;
+  padding: 0 0.25rem;
+}
+
 .staff {
   display: grid;
   /* 5 lines × 3 rows + 2 extra above/ 1 below */
   grid-template-rows: repeat(14, var(--row-height));
-  grid-template-columns: repeat(16, 1fr);
+  grid-template-columns: repeat(19, 28px);
   height: calc(var(--row-height) * 12);
   width: 100%;
   background-color: var(--color-white);
   position: relative;
 }
-
 .staff::before {
   content: "";
   position: absolute;
   top: calc(var(--row-height) * 4);
   height: calc(var(--row-height) * 8);
   left: 0;
-  width: 1px;
+  width: 2px;
   background-color: var(--color-black);
 }
 
@@ -25,7 +35,7 @@
   top: calc(var(--row-height) * 4);
   height: calc(var(--row-height) * 8);
   right: 0;
-  width: 1px;
+  width: 2px;
   background-color: var(--color-black);
 }
 
@@ -52,13 +62,52 @@
   grid-row: 12 / span 2;
 }
 
-.meta {
+.timeSignatureInStaff {
+  grid-column: 1;
+  grid-row: 6 / span 6;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 500;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.85rem;
+  text-align: center;
+  font-weight: bold;
   color: var(--color-gray-600);
-  margin-bottom: 0.25rem;
-  padding: 0 0.25rem;
+  font-weight: 500;
+}
+
+.doubleBar {
+  grid-column: 2;
+  grid-row: 6 / span 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.doubleBar::before,
+.doubleBar::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-black);
+}
+
+.doubleBar::before {
+  left: 2px;
+}
+
+.doubleBar::after {
+  left: 8px;
+}
+
+.barLine {
+  display: flex;
+  justify-self: center;
+  grid-column: 11; /* assuming 8 steps + offset 2 = mid at column 10 */
+  grid-row: 5 / span 8; /* same vertical span as staff lines */
+  background-color: var(--color-black);
+  width: 2px;
+  z-index: 1;
 }

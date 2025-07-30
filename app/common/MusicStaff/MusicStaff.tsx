@@ -21,9 +21,6 @@ const MusicStaff: React.FC<MusicStaffProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.meta}>
-        <span>
-          {timeSignature[0]} / {timeSignature[1]}
-        </span>
         <span>♪ = {tempo}</span>
       </div>
 
@@ -35,13 +32,30 @@ const MusicStaff: React.FC<MusicStaffProps> = ({
         <div className={styles.line} />
         <div className={styles.line} />
 
-        {/* Notes */}
+        <div className={styles.timeSignatureInStaff}>
+          <span>{timeSignature[0]}</span>
+          <span>{timeSignature[1]}</span>
+        </div>
+
+        <div className={styles.doubleBar} />
+        {/* Notes (offset by +2) */}
         {pattern.map((notesInStep, stepIndex) =>
           notesInStep.map(([midi, velocity], i) => (
             <Note
               key={`${stepIndex}-${midi}-${i}`}
               row={midiPositionMap[midi]}
-              column={stepIndex + 1}
+              column={stepIndex + 3}
+              velocity={velocity}
+            />
+          ))
+        )}
+        <div className={styles.barLine} />
+        {pattern.map((notesInStep, stepIndex) =>
+          notesInStep.map(([midi, velocity], i) => (
+            <Note
+              key={`${stepIndex}-${midi}-${i}`}
+              row={midiPositionMap[midi]}
+              column={stepIndex + 3 + 9}
               velocity={velocity}
             />
           ))
