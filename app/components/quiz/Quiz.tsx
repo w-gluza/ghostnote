@@ -54,7 +54,7 @@ const Quiz = () => {
 
   const pattern: Array<[MidiNoteValue, VelocityValue][]> = [
     [
-      [36, 100],
+      [36, 30],
       [42, 100],
     ],
     [[42, 100]],

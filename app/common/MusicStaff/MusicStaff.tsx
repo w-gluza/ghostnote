@@ -37,7 +37,7 @@ const MusicStaff: React.FC<MusicStaffProps> = ({
             key={`${stepIndex}-${midi}-${i}`}
             row={midiPositionMap[midi]}
             column={stepIndex + 1}
-            // velocity={velocity}
+            velocity={velocity}
           />
         ))
       )}
