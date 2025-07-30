@@ -1,33 +1,34 @@
+// 🥁 Drum MIDI Note Values (Top-to-Bottom Layout)
 export type MidiNoteValue =
-  | 36 // Bass Drum
-  | 38 // Snare Drum
-  | 41 // Floor Tom
-  | 45 // Tom 2 (Low Tom)
-  | 48 // Tom 1 (High Tom)
-  | 42 // Hi-Hat (Closed)
   | 49 // Crash Cymbal
-  | 51; // Ride Cymbal
+  | 51 // Ride Cymbal
+  | 42 // Hi-Hat (Closed)
+  | 48 // Rack Tom 1 (High Tom)
+  | 47 // Rack Tom 2 (Mid Tom)
+  | 38 // Snare Drum
+  | 45 // Floor Tom
+  | 36; // Bass Drum
 
 export const midiNoteMap: Record<MidiNoteValue, string> = {
-  36: "Bass Drum",
-  38: "Snare Drum",
-  41: "Floor Tom",
-  45: "Tom 2 (Low Rack Tom)",
-  48: "Tom 1 (High Rack Tom)",
-  42: "Hi-Hat (Closed)",
   49: "Crash Cymbal",
   51: "Ride Cymbal",
+  42: "Hi-Hat (Closed)",
+  48: "Rack Tom 1 (High)",
+  47: "Rack Tom 2 (Mid)",
+  38: "Snare Drum",
+  45: "Floor Tom",
+  36: "Bass Drum",
 };
 
 export const midiPositionMap: Record<MidiNoteValue, number> = {
-  36: 9, // Bass Drum
-  38: 5, // Snare Drum
-  41: 7, // Floor Tom
-  45: 4, // Tom 2
-  48: 3, // Tom 1
-  42: 1, // Hi-Hat
-  49: 1, // Crash Cymbal (same row as Hi-Hat for now)
+  49: 1, // Crash Cymbal (top row)
   51: 2, // Ride Cymbal
+  42: 3, // Hi-Hat (Closed)
+  48: 4, // Rack Tom 1 (High Tom)
+  47: 5, // Rack Tom 2 (Mid Tom)
+  38: 6, // Snare Drum
+  45: 8, // Floor Tom
+  36: 11, // Bass Drum (bottom row)
 };
 
 export type VelocityValue = 127 | 100 | 64 | 30;

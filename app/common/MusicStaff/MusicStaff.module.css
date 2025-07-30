@@ -1,7 +1,7 @@
 .staff {
   display: grid;
-  /* 5 lines × 2 rows + 2 extra for notes above/below */
-  grid-template-rows: repeat(12, var(--row-height));
+  /* 5 lines × 3 rows + 2 extra above/ 1 below */
+  grid-template-rows: repeat(14, var(--row-height));
   grid-template-columns: repeat(16, 1fr);
   height: calc(var(--row-height) * 12);
   width: 100%;
@@ -17,17 +17,17 @@
 }
 
 .line:nth-child(1) {
-  grid-row: 2 / span 2;
-}
-.line:nth-child(2) {
   grid-row: 4 / span 2;
 }
-.line:nth-child(3) {
+.line:nth-child(2) {
   grid-row: 6 / span 2;
 }
-.line:nth-child(4) {
+.line:nth-child(3) {
   grid-row: 8 / span 2;
 }
-.line:nth-child(5) {
+.line:nth-child(4) {
   grid-row: 10 / span 2;
+}
+.line:nth-child(5) {
+  grid-row: 12 / span 2;
 }
