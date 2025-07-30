@@ -17,6 +17,10 @@ const PatternCard: React.FC<PatternCardProps> = ({
   return (
     <div
       className={`${styles.card} ${selected ? styles.selected : ""}`}
+      role="button"
+      tabIndex={0}
+      aria-pressed={selected}
+      aria-label={`Select pattern ${label}`}
       onClick={onSelect}
     >
       <div className={styles.label}>{label}</div>
