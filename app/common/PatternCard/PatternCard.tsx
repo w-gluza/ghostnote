@@ -23,7 +23,6 @@ const PatternCard = ({
       aria-label={`Select pattern ${label}`}
       onClick={onSelect}
     >
-      <div className={styles.label}>{label}</div>
       {children}
     </div>
   );

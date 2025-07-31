@@ -13,7 +13,7 @@
   display: grid;
   /* 5 lines × 3 rows + 2 extra above/ 1 below */
   grid-template-rows: repeat(14, var(--row-height));
-  grid-template-columns: repeat(19, 28px);
+  grid-template-columns: repeat(19, var(--note-width));
   height: calc(var(--row-height) * 12);
   width: 100%;
   background-color: var(--color-white);

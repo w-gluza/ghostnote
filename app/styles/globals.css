@@ -22,7 +22,7 @@
   --color-gray-50: #fcfcfc;
   --color-white: #fafafa;
 
-  --row-height: 10px;
+  --row-height: 6px;
   --note-height: calc(var(--row-height) * 2);
   --note-width: calc(var(--note-height) * 1.4);
 }
