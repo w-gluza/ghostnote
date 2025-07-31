@@ -21,7 +21,7 @@ const Quiz = () => {
   const handleSubmit = () => {
     if (
       selectedIndex !== null &&
-      question.options[selectedIndex].label === question.correctAnswerLabel
+      question.options[selectedIndex].id === question.correctPatternId
     ) {
       setScore((s) => s + 1);
     }
@@ -33,6 +33,10 @@ const Quiz = () => {
       setIsFinished(true);
     }
   };
+
+  const correctPattern = question.options.find(
+    (p) => p.id === question.correctPatternId
+  );
 
   return (
     <div className={styles.container}>
@@ -50,18 +54,16 @@ const Quiz = () => {
 
           <div className={styles["player-container"]}>
             <DrumMachine
-              pattern={question.correctPattern}
+              pattern={correctPattern!.pattern}
               stepLength={question.stepLength}
             />
           </div>
 
-          <h2 className={styles.question}>{question.question}</h2>
-
           <div className={styles.grid}>
             {question.options.map((option, index) => (
               <PatternCard
-                key={option.label}
-                label={option.label}
+                key={option.id}
+                label={option.name}
                 selected={selectedIndex === index}
                 onSelect={() => handleSelect(index)}
               >
@@ -69,7 +71,7 @@ const Quiz = () => {
                   pattern={option.pattern}
                   tempo={120}
                   timeSignature={[4, 4]}
-                  label={option.label}
+                  label={option.name}
                 />
               </PatternCard>
             ))}

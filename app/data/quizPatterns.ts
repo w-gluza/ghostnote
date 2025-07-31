@@ -1,145 +1,20 @@
-import type { MidiNoteValue, VelocityValue } from "@/app/utils/midiMap";
-import type { StepLength } from "@/app/types/music";
+import type { QuizQuestion } from "@/app/types/patterns";
+import { patterns } from "@/app/data/patterns";
 
-export type Pattern = Array<[MidiNoteValue, VelocityValue][]>;
-
-export interface PatternOption {
-  label: string;
-  pattern: Pattern;
-}
-export interface QuizQuestion {
-  question: string;
-  correctAnswerLabel: string;
-  correctPattern: Pattern;
-  options: PatternOption[];
-  stepLength: StepLength;
-}
-
-const patternA: Pattern = [
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [38, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [38, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-];
-
-const patternB: Pattern = [
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [38, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-];
-
-const patternC: Pattern = [
-  [
-    [36, 100],
-    [49, 100],
-  ],
-  [[42, 100]],
-  [[42, 100]],
-  [[42, 100]],
-  [
-    [38, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-];
-
-const patternD: Pattern = [
-  [
-    [36, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [47, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [45, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-  [
-    [38, 100],
-    [42, 100],
-  ],
-  [[42, 100]],
-];
 export const quizData: QuizQuestion[] = [
   {
-    question:
-      "Which pattern has alternating snare and kick with constant hi-hat?",
-    correctPattern: patternA,
-    correctAnswerLabel: "A",
+    correctPatternId: patterns[0].id, // Disco Beat
     stepLength: 8,
-    options: [
-      { label: "A", pattern: patternA },
-      { label: "B", pattern: patternB },
-      { label: "C", pattern: patternC },
-      { label: "D", pattern: patternD },
-    ],
+    options: [patterns[0], patterns[1], patterns[2], patterns[3]],
   },
   {
-    question: "Which pattern includes a crash cymbal on beat 5?",
-    correctPattern: patternD,
-    correctAnswerLabel: "D",
+    correctPatternId: patterns[3].id, // Jazz Swing
     stepLength: 8,
-    options: [
-      { label: "A", pattern: patternA },
-      { label: "B", pattern: patternB },
-      { label: "C", pattern: patternC },
-      { label: "D", pattern: patternD },
-    ],
+    options: [patterns[0], patterns[1], patterns[2], patterns[3]],
   },
   {
-    question:
-      "Which groove starts with kick + hi-hat and has rests on beats 2 and 8?",
-    correctPattern: patternB,
-    correctAnswerLabel: "B",
+    correctPatternId: patterns[1].id, // Funk Shuffle
     stepLength: 8,
-    options: [
-      { label: "A", pattern: patternA },
-      { label: "B", pattern: patternB },
-      { label: "C", pattern: patternC },
-      { label: "D", pattern: patternD },
-    ],
+    options: [patterns[0], patterns[1], patterns[2], patterns[3]],
   },
 ];
