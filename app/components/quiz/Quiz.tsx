@@ -44,7 +44,14 @@ const Quiz = () => {
             Listen to the pattern and select the matching visual.
           </p>
 
-          <DrumMachine pattern={question.correctPattern} />
+          <p className={styles.instruction}>
+            Question {currentQuestion + 1} of {quizData.length}
+          </p>
+
+          <div className={styles["player-container"]}>
+            <DrumMachine pattern={question.correctPattern} />
+          </div>
+
           <h2 className={styles.question}>{question.question}</h2>
 
           <div className={styles.grid}>
@@ -59,6 +66,7 @@ const Quiz = () => {
                   pattern={option.pattern}
                   tempo={120}
                   timeSignature={[4, 4]}
+                  label={option.label}
                 />
               </PatternCard>
             ))}
