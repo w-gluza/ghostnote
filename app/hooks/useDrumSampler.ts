@@ -9,14 +9,17 @@ export function useDrumSampler(pattern: Pattern) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [bpm, setBpm] = useState(120);
   const [loop, setLoop] = useState(false);
-
   const toneRef = useRef<ToneModule | null>(null);
+  const isSamplerLoaded = useRef(false);
+  const stopListenerRef = useRef<(() => void) | null>(null);
   const samplerRef = useRef<InstanceType<ToneModule["Sampler"]> | null>(null);
   const transportRef = useRef<ReturnType<ToneModule["getTransport"]> | null>(
     null
   );
-  const isSamplerLoaded = useRef(false);
 
+  /**
+   * Ensures AudioContext is resumed and samples are loaded before playback.
+   */
   const initAudio = async () => {
     if (!toneRef.current) {
       toneRef.current = await import("tone");
@@ -25,7 +28,7 @@ export function useDrumSampler(pattern: Pattern) {
     const { getContext, Sampler, getTransport, start, Frequency } =
       toneRef.current;
 
-    // Ensure AudioContext is resumed after user gesture
+    // Resume AudioContext if not already running (required by browsers)
     const ctx = getContext();
     if (ctx.state !== "running") {
       await start();
@@ -44,6 +47,7 @@ export function useDrumSampler(pattern: Pattern) {
         48: "/samples/tom2_placeholder.wav",
       };
 
+      // Load sampler and wait for all samples to finish loading
       await new Promise<void>((resolve) => {
         const sampler = new Sampler({
           urls: Object.entries(sampleMap).reduce(
@@ -66,6 +70,10 @@ export function useDrumSampler(pattern: Pattern) {
     }
   };
 
+  /**
+   * Starts playback of the provided pattern.
+   * Reschedules all notes and starts Tone.Transport.
+   */
   const start = async () => {
     if (isPlaying) return;
 
@@ -76,10 +84,11 @@ export function useDrumSampler(pattern: Pattern) {
       return;
     }
 
-    const { Frequency } = toneRef.current!;
+    const { Frequency, Time } = toneRef.current!;
     const sampler = samplerRef.current;
     const transport = transportRef.current!;
 
+    // Reset and configure transport
     transport.bpm.value = bpm;
     transport.cancel();
     transport.stop();
@@ -97,21 +106,49 @@ export function useDrumSampler(pattern: Pattern) {
       });
     });
 
+    // Configure loop settings
+    const loopEndBars = Math.ceil(pattern.length / 4);
     transport.loop = loop;
     transport.loopStart = "0:0:0";
-    transport.loopEnd = `${Math.ceil(pattern.length / 4)}:0:0`;
+    transport.loopEnd = `${loopEndBars}:0:0`;
+
+    // 🔁 Auto-stop: if not looping, reset isPlaying when transport ends
+    if (!loop) {
+      const endTime = Time(transport.loopEnd).toSeconds();
+      const stopId = transport.scheduleOnce(() => {
+        setIsPlaying(false);
+      }, endTime);
+
+      // Store cancel function in case stop is called manually
+      stopListenerRef.current = () => {
+        transport.clear(stopId);
+      };
+    }
 
     transport.start();
     setIsPlaying(true);
   };
 
+  /**
+   * Stops transport and clears any scheduled events.
+   */
   const stop = () => {
-    if (transportRef.current) {
-      transportRef.current.stop();
-      setIsPlaying(false);
+    const transport = transportRef.current;
+    if (!transport) return;
+
+    transport.stop();
+
+    if (stopListenerRef.current) {
+      stopListenerRef.current();
+      stopListenerRef.current = null;
     }
+
+    setIsPlaying(false);
   };
 
+  /**
+   * Toggles playback on/off.
+   */
   const toggle = () => {
     if (isPlaying) stop();
     else start();
