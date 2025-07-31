@@ -4,6 +4,7 @@ import styles from "./Quiz.module.css";
 import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
 import { quizData } from "@/app/data/quizPatterns";
 import PatternCard from "@/app/common/PatternCard/PatternCard";
+import DrumMachine from "../drum-machine/DrumMachine";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -43,8 +44,7 @@ const Quiz = () => {
             Listen to the pattern and select the matching visual.
           </p>
 
-          <audio controls src={question.audioUrl} className={styles.audio} />
-
+          <DrumMachine pattern={question.correctPattern} />
           <h2 className={styles.question}>{question.question}</h2>
 
           <div className={styles.grid}>
