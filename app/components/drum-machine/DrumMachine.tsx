@@ -3,7 +3,7 @@
 import React from "react";
 import MusicPlayer from "../../common/MusicPlayer/MusicPlayer";
 import { useDrumSampler } from "@/app/hooks/useDrumSampler";
-import type { Pattern } from "@/app/data/quizPatterns";
+import type { Pattern } from "@/app/types/patterns";
 
 interface DrumMachineProps {
   pattern: Pattern;

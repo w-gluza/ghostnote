@@ -1,8 +1,9 @@
 import { prisma } from "../lib/prisma.ts";
+import { patterns } from "../app/data/patterns.ts";
 
 async function main() {
-  // 1. Create user
-  const user = await prisma.user.upsert({
+  // 1. Create or update user
+  await prisma.user.upsert({
     where: { email: "test@example.com" },
     update: {},
     create: {
@@ -13,35 +14,29 @@ async function main() {
     },
   });
 
-  // 2. Create quiz
-  const quiz = await prisma.quiz.create({
-    data: {
-      audioUrl: "https://example.com/audio/groove1.mp3",
-      pattern: "1001001001001001", // correct pattern
-      correctIndex: 2,
-      options: [
-        "0000000000000000",
-        "1111111111111111",
-        "1001001001001001", // correct
-        "1010101010101010",
-      ],
-    },
-  });
+  // 2. Seed patterns
+  for (const pattern of patterns) {
+    await prisma.pattern.upsert({
+      where: { id: pattern.id },
+      update: {},
+      create: {
+        name: pattern.name,
+        bpm: pattern.bpm,
+        stepLength: pattern.stepLength,
+        difficulty: pattern.difficulty,
+        pattern: pattern.pattern,
+        description: pattern.description,
+        tags: pattern.tags || [],
+      },
+    });
+  }
 
-  // 3. Record a quiz result
-  await prisma.quizResult.create({
-    data: {
-      userId: user.id,
-      quizId: quiz.id,
-      isCorrect: true,
-      xpGained: 10,
-    },
-  });
+  console.log("✅ Seeding complete");
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error("❌ Seed error:", e);
     process.exit(1);
   })
   .finally(async () => {
