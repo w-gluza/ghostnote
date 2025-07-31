@@ -1,30 +1,46 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import styles from "./Quiz.module.css";
 import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
-import { patterns } from "@/app/data/patterns";
 import PatternCard from "@/app/common/PatternCard/PatternCard";
 import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
 
 const Quiz = () => {
+  const [patterns, setPatterns] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
-  // ✅ Generate quiz only once on initial render
-  const quizData = useMemo(
-    () =>
-      generateQuiz({
-        patterns,
-        count: 5,
-        difficulty: 2,
-      }),
-    []
-  );
+  useEffect(() => {
+    fetch("/api/patterns")
+      .then((res) => res.json())
+      .then((data) => {
+        setPatterns(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const quizData = useMemo(() => {
+    if (patterns.length === 0) return [];
+    return generateQuiz({
+      patterns,
+      count: 5,
+      difficulty: 2,
+    });
+  }, [patterns]);
+
+  if (loading) return <p>Loading quiz patterns...</p>;
+  if (!quizData.length) return <p>No quiz data available.</p>;
 
   const question = quizData[currentQuestion];
+  const correctPattern = question.options.find(
+    (p) => p.id === question.correctPatternId
+  );
 
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
@@ -37,7 +53,6 @@ const Quiz = () => {
     ) {
       setScore((s) => s + 1);
     }
-
     if (currentQuestion + 1 < quizData.length) {
       setCurrentQuestion((q) => q + 1);
       setSelectedIndex(null);
@@ -45,10 +60,6 @@ const Quiz = () => {
       setIsFinished(true);
     }
   };
-
-  const correctPattern = question.options.find(
-    (p) => p.id === question.correctPatternId
-  );
 
   return (
     <div className={styles.container}>

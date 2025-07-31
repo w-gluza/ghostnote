@@ -13,26 +13,15 @@ model User {
   nick    String       @unique
   xp      Int          @default(0)
   level   Int          @default(1)
-  quizzes QuizResult[]
 }
 
-model Quiz {
-  id           String       @id @default(uuid())
-  audioUrl     String
-  pattern      String // correct pattern
-  correctIndex Int
-  options      String[] // all 4 pattern choices
-  createdAt    DateTime     @default(now())
-  results      QuizResult[]
-}
-
-model QuizResult {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
-  quizId    String
-  isCorrect Boolean
-  xpGained  Int
-  createdAt DateTime @default(now())
+model Pattern {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique 
+  bpm         Int
+  stepLength  Int
+  difficulty  Int
+  pattern     Json
+  description String?
+  tags        String[]
 }
