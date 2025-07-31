@@ -6,7 +6,7 @@ export interface PatternDefinition {
   id: number;
   name: string;
   bpm: number;
-  stepLength: number;
+  stepLength: StepLength;
   difficulty: number; // 1–10
   pattern: Pattern;
   description?: string;

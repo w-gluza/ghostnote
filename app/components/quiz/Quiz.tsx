@@ -1,16 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import styles from "./Quiz.module.css";
 import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
-import { quizData } from "@/app/data/quizPatterns";
+import { patterns } from "@/app/data/patterns";
 import PatternCard from "@/app/common/PatternCard/PatternCard";
 import DrumMachine from "../drum-machine/DrumMachine";
+import { generateQuiz } from "@/app/utils/generateQuiz";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+
+  // ✅ Generate quiz only once on initial render
+  const quizData = useMemo(
+    () =>
+      generateQuiz({
+        patterns,
+        count: 5,
+        difficulty: 2,
+      }),
+    []
+  );
 
   const question = quizData[currentQuestion];
 

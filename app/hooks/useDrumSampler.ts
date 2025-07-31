@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import type { MidiNoteValue } from "@/app/utils/midiMap";
-import type { Pattern } from "@/app/data/quizPatterns";
+import type { Pattern } from "@/app/types/patterns";
 import { velocityToGain } from "../utils/tone";
 
 type ToneModule = typeof import("tone");
