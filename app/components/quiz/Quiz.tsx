@@ -49,7 +49,10 @@ const Quiz = () => {
           </p>
 
           <div className={styles["player-container"]}>
-            <DrumMachine pattern={question.correctPattern} />
+            <DrumMachine
+              pattern={question.correctPattern}
+              stepLength={question.stepLength}
+            />
           </div>
 
           <h2 className={styles.question}>{question.question}</h2>

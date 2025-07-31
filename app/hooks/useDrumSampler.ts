@@ -4,8 +4,16 @@ import type { Pattern } from "@/app/data/quizPatterns";
 import { velocityToGain } from "../utils/tone";
 
 type ToneModule = typeof import("tone");
+type StepsLength = 4 | 8 | 16 | 32;
 
-export function useDrumSampler(pattern: Pattern) {
+const noteDurations = {
+  4: "4n",
+  8: "8n",
+  16: "16n",
+  32: "32n",
+} as const;
+
+export function useDrumSampler(pattern: Pattern, stepLength: StepsLength) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [bpm, setBpm] = useState(120);
   const [loop, setLoop] = useState(false);
@@ -95,19 +103,29 @@ export function useDrumSampler(pattern: Pattern) {
     transport.position = "0:0:0";
 
     pattern.forEach((step, i) => {
-      const time = `${Math.floor(i / 4)}:${i % 4}:0`;
+      const stepsPerBar = stepLength;
+      const stepDurationInBeats = 4 / stepsPerBar;
+
+      const bar = Math.floor(i / stepsPerBar);
+      const stepInBar = i % stepsPerBar;
+      const time = `${bar}:${stepInBar * stepDurationInBeats}`;
 
       step.forEach(([note, velocity]) => {
         const noteName = Frequency(note, "midi").toNote();
         const gain = velocityToGain(velocity);
         transport.schedule((t: number) => {
-          sampler.triggerAttackRelease(noteName, "8n", t, gain);
+          sampler.triggerAttackRelease(
+            noteName,
+            noteDurations[stepLength],
+            t,
+            gain
+          );
         }, time);
       });
     });
 
     // Configure loop settings
-    const loopEndBars = Math.ceil(pattern.length / 4);
+    const loopEndBars = Math.ceil(pattern.length / stepLength);
     transport.loop = loop;
     transport.loopStart = "0:0:0";
     transport.loopEnd = `${loopEndBars}:0:0`;
