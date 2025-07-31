@@ -50,9 +50,9 @@ export function useDrumSampler(pattern: Pattern, stepLength: StepsLength) {
         42: "/samples/hihat.wav",
         49: "/samples/crash.wav",
         51: "/samples/cymbal.wav",
-        45: "/samples/floor_placeholder.wav",
-        47: "/samples/tom1_placeholder.wav",
-        48: "/samples/tom2_placeholder.wav",
+        45: "/samples/floor.wav",
+        47: "/samples/tom1.wav",
+        48: "/samples/tom2.wav",
       };
 
       // Load sampler and wait for all samples to finish loading
