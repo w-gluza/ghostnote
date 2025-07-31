@@ -1,30 +1,25 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import styles from "./MusicPlayer.module.css";
 
 interface MusicPlayerProps {
   tempo: number;
-  isLooping: boolean;
   isPlaying: boolean;
   onTempoChange: (newTempo: number) => void;
   onPlayToggle: () => void;
   onLoopToggle: () => void;
 }
 
-const MusicPlayer: React.FC<MusicPlayerProps> = ({
+const MusicPlayer = ({
   tempo,
-  isLooping,
   isPlaying,
   onTempoChange,
   onPlayToggle,
   onLoopToggle,
-}) => {
+}: MusicPlayerProps) => {
   return (
     <div className={styles.card}>
       <div className={styles.control}>
-        {/* Tempo Control */}
         <div className={styles["bpm-control"]}>
           <button
             onClick={() => onTempoChange(tempo - 5)}
@@ -56,7 +51,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
           </button>
         </div>
 
-        {/* Play Button */}
         <button
           className={`${styles.btn} ${styles["play-toggle"]}`}
           onClick={onPlayToggle}
@@ -70,10 +64,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
           />
         </button>
 
-        {/* Loop Button */}
-        <button onClick={onLoopToggle} aria-label="Toggle Loop">
-          <Image src="/icons/app/loop.svg" alt="Loop" width={14} height={14} />
-          {isLooping && "Looping:)"}
+        <button
+          onClick={onLoopToggle}
+          aria-label="Toggle Loop"
+          className={styles["btn-loop"]}
+        >
+          <Image src="/icons/app/loop.svg" alt="Loop" width={16} height={16} />
         </button>
       </div>
     </div>
