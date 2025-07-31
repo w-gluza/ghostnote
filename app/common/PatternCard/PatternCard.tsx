@@ -8,12 +8,12 @@ interface PatternCardProps {
   children: ReactNode;
 }
 
-const PatternCard: React.FC<PatternCardProps> = ({
+const PatternCard = ({
   label,
   selected,
   onSelect,
   children,
-}) => {
+}: PatternCardProps) => {
   return (
     <div
       className={`${styles.card} ${selected ? styles.selected : ""}`}
