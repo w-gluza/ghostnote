@@ -1,4 +1,5 @@
 import type { MidiNoteValue, VelocityValue } from "@/app/utils/midiMap";
+import type { StepLength } from "@/app/types/music";
 
 export type Pattern = Array<[MidiNoteValue, VelocityValue][]>;
 
@@ -8,9 +9,10 @@ export interface PatternOption {
 }
 export interface QuizQuestion {
   question: string;
-  options: PatternOption[];
-  audioUrl: string;
   correctAnswerLabel: string;
+  correctPattern: Pattern;
+  options: PatternOption[];
+  stepLength: StepLength;
 }
 
 const patternA: Pattern = [
@@ -105,8 +107,9 @@ export const quizData: QuizQuestion[] = [
   {
     question:
       "Which pattern has alternating snare and kick with constant hi-hat?",
-    audioUrl: "/audio/patternA.wav",
+    correctPattern: patternA,
     correctAnswerLabel: "A",
+    stepLength: 8,
     options: [
       { label: "A", pattern: patternA },
       { label: "B", pattern: patternB },
@@ -116,8 +119,9 @@ export const quizData: QuizQuestion[] = [
   },
   {
     question: "Which pattern includes a crash cymbal on beat 5?",
-    audioUrl: "/audio/patternD.wav",
+    correctPattern: patternD,
     correctAnswerLabel: "D",
+    stepLength: 8,
     options: [
       { label: "A", pattern: patternA },
       { label: "B", pattern: patternB },
@@ -128,8 +132,9 @@ export const quizData: QuizQuestion[] = [
   {
     question:
       "Which groove starts with kick + hi-hat and has rests on beats 2 and 8?",
-    audioUrl: "/audio/patternB.wav",
+    correctPattern: patternB,
     correctAnswerLabel: "B",
+    stepLength: 8,
     options: [
       { label: "A", pattern: patternA },
       { label: "B", pattern: patternB },

@@ -1,0 +1,70 @@
+.card {
+  background-color: var(--color-white);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 360px;
+  display: flex;
+  justify-content: center;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.btn {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.play-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-black);
+}
+
+.bpm-control {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  align-items: center;
+  gap: 12px;
+}
+
+.bpm-display {
+  text-align: center;
+  margin: 4px 0;
+}
+
+.bpm-value {
+  font-size: 20px;
+  font-weight: var(--weight-bold);
+  color: var(--color-gray-500);
+}
+
+.bpm-label {
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  color: var(--color-black);
+  line-height: 1;
+}
+
+.btn-loop {
+  justify-self: end;
+}

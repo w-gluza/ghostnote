@@ -11,16 +11,19 @@ interface MusicStaffProps {
   pattern: Array<[MidiNoteValue, VelocityValue][]>;
   tempo: number;
   timeSignature: [number, number]; // e.g., "4/4", "6/8"
+  label?: string;
 }
 
-const MusicStaff: React.FC<MusicStaffProps> = ({
+const MusicStaff = ({
   pattern,
   tempo,
   timeSignature,
-}) => {
+  label,
+}: MusicStaffProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.meta}>
+        {label && <span>{label}</span>}
         <span>♪ = {tempo}</span>
       </div>
 

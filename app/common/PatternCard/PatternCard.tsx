@@ -8,12 +8,12 @@ interface PatternCardProps {
   children: ReactNode;
 }
 
-const PatternCard: React.FC<PatternCardProps> = ({
+const PatternCard = ({
   label,
   selected,
   onSelect,
   children,
-}) => {
+}: PatternCardProps) => {
   return (
     <div
       className={`${styles.card} ${selected ? styles.selected : ""}`}
@@ -23,7 +23,6 @@ const PatternCard: React.FC<PatternCardProps> = ({
       aria-label={`Select pattern ${label}`}
       onClick={onSelect}
     >
-      <div className={styles.label}>{label}</div>
       {children}
     </div>
   );
