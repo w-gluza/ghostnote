@@ -1,5 +1,6 @@
 import styles from "./LandingPage.module.css";
 import Link from "next/link";
+import DrumMachine from "../drum-machine/DrumMachine";
 
 export default function LandingPage() {
   return (
@@ -11,6 +12,7 @@ export default function LandingPage() {
           Start Practicing
         </Link>
       </section>
+      <DrumMachine />
 
       <section className={styles.featuresHorizontal}>
         <div className={styles.featureItem}>
