@@ -15,18 +15,25 @@ async function main() {
   });
 
   // 2. Seed patterns
-  for (const pattern of patterns) {
+  for (const p of patterns) {
     await prisma.pattern.upsert({
-      where: { id: pattern.id },
-      update: {},
+      where: { name: p.name },
+      update: {
+        bpm: p.bpm,
+        stepLength: p.stepLength,
+        difficulty: p.difficulty,
+        pattern: p.pattern,
+        description: p.description ?? null,
+        tags: p.tags ?? [],
+      },
       create: {
-        name: pattern.name,
-        bpm: pattern.bpm,
-        stepLength: pattern.stepLength,
-        difficulty: pattern.difficulty,
-        pattern: pattern.pattern,
-        description: pattern.description,
-        tags: pattern.tags || [],
+        name: p.name,
+        bpm: p.bpm,
+        stepLength: p.stepLength,
+        difficulty: p.difficulty,
+        pattern: p.pattern,
+        description: p.description ?? null,
+        tags: p.tags ?? [],
       },
     });
   }
@@ -39,6 +46,4 @@ main()
     console.error("❌ Seed error:", e);
     process.exit(1);
   })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  .finally(() => prisma.$disconnect());
