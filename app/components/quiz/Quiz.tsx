@@ -5,6 +5,7 @@ import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
 import PatternCard from "@/app/common/PatternCard/PatternCard";
 import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
+import ProgressBar from "@/app/common/ProgressBar/ProgressBar";
 
 const Quiz = () => {
   const [patterns, setPatterns] = useState([]);
@@ -30,7 +31,7 @@ const Quiz = () => {
     return generateQuiz({
       patterns,
       count: 5,
-      difficulty: 2,
+      difficulty: 3,
     });
   }, [patterns]);
 
@@ -70,7 +71,11 @@ const Quiz = () => {
           <p className={styles.instruction}>
             Listen to the pattern and select the matching visual.
           </p>
-
+          <ProgressBar
+            percentage={25}
+            labelText={"Question 1 of 10"}
+            labelPosition={"top-right"}
+          />
           <p className={styles.instruction}>
             Question {currentQuestion + 1} of {quizData.length}
           </p>
