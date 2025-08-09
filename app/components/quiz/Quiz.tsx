@@ -6,6 +6,7 @@ import PatternCard from "@/app/common/PatternCard/PatternCard";
 import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
 import ProgressBar from "@/app/common/ProgressBar/ProgressBar";
+import Score from "@/app/common/Score/Score";
 
 const Quiz = () => {
   const [patterns, setPatterns] = useState([]);
@@ -16,6 +17,7 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
+  const currentQuizLevel = 3;
   useEffect(() => {
     fetch("/api/patterns")
       .then((res) => res.json())
@@ -31,7 +33,7 @@ const Quiz = () => {
     return generateQuiz({
       patterns,
       count: 5,
-      difficulty: 3,
+      difficulty: currentQuizLevel,
     });
   }, [patterns]);
 
@@ -64,20 +66,14 @@ const Quiz = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>🎵 Groove Recognition Quiz</h1>
-
+      <header className={styles.header}>
+        <h1 className={styles.heading}>Quiz Level {currentQuizLevel}</h1>
+        <Score value={score} max={quizData.length} />
+      </header>
       {!isFinished && (
         <>
           <p className={styles.instruction}>
-            Listen to the pattern and select the matching visual.
-          </p>
-          <ProgressBar
-            percentage={25}
-            labelText={"Question 1 of 10"}
-            labelPosition={"top-right"}
-          />
-          <p className={styles.instruction}>
-            Question {currentQuestion + 1} of {quizData.length}
+            Listen to the pattern and select the matching music staff.
           </p>
 
           <div className={styles["player-container"]}>
@@ -86,6 +82,11 @@ const Quiz = () => {
               stepLength={question.stepLength}
             />
           </div>
+          <ProgressBar
+            percentage={25}
+            labelText={`Question ${currentQuestion + 1} of ${quizData.length}`}
+            labelPosition={"top-right"}
+          />
 
           <div className={styles.grid}>
             {question.options.map((option, index) => (
@@ -113,16 +114,6 @@ const Quiz = () => {
             {currentQuestion + 1 === quizData.length ? "Finish Quiz" : "Next"}
           </button>
         </>
-      )}
-
-      {isFinished && (
-        <div className={styles.result}>
-          <h2>🎉 Quiz Completed!</h2>
-          <p>
-            You scored <strong>{score}</strong> out of{" "}
-            <strong>{quizData.length}</strong>
-          </p>
-        </div>
       )}
     </div>
   );
