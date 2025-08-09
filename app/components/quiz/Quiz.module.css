@@ -1,13 +1,3 @@
-.container {
-  padding: 1.5rem;
-  max-width: 860px;
-  margin: 0 auto;
-  font-family: var(--font-sans);
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
 .header {
   display: flex;
   justify-content: space-between;

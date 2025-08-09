@@ -1,0 +1,96 @@
+.card {
+  border: 1px solid var(--color-gray-300);
+  border-radius: 8px;
+  background: var(--color-white);
+  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 16px;
+  border-bottom: 1px solid var(--color-gray-200);
+  display: grid;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+}
+
+.content {
+  padding: 12px 16px 16px;
+}
+
+.empty {
+  margin: 6px 0 0;
+  color: var(--color-gray-600);
+  font-size: 0.9rem;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.row {
+  padding: 8px 0;
+}
+
+.withDivider {
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowLink,
+.rowInner {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.left {
+  display: grid;
+  gap: 2px;
+}
+
+.topLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.itemTitle {
+  font-weight: 600;
+}
+
+.meta {
+  color: var(--color-gray-700);
+  font-size: 0.9rem;
+}
+
+.time {
+  color: var(--color-gray-600);
+  font-size: 0.8rem;
+}
+
+/* hover for linked rows */
+@media (hover: hover) {
+  .rowLink:hover {
+    opacity: 0.9;
+  }
+}
