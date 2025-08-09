@@ -1,0 +1,23 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 0.125rem 0.625rem;
+  font-weight: 600;
+  border: 1px solid #e0e0e0;
+  width: max-content;
+  border-radius: 12px;
+  align-items: center;
+  gap: 4px;
+}
+
+/* .icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+} */
+
+.label {
+  white-space: nowrap;
+}
