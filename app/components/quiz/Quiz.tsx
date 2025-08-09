@@ -7,10 +7,6 @@ import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
 import ProgressBar from "@/app/common/ProgressBar/ProgressBar";
 import Score from "@/app/common/Score/Score";
-import Badge from "@/app/common/Badge/Badge";
-import Image from "next/image";
-import Streak from "@/app/common/Streak/Streak";
-import Avatar from "@/app/common/Avatar/Avatar";
 
 const Quiz = () => {
   const [patterns, setPatterns] = useState([]);
@@ -69,34 +65,7 @@ const Quiz = () => {
   };
 
   return (
-    <>
-      <Badge
-        label="Streak"
-        icon={
-          <Image
-            src="/icons/app/flame.svg"
-            alt="Flame"
-            width={10}
-            height={10}
-          />
-        }
-      />
-      <Avatar fallback="WG" />
-      <Streak
-        value={5}
-        max={7}
-        label="Streak"
-        icon={
-          <Image
-            src="/icons/app/flame.svg"
-            alt="Flame"
-            width={12}
-            height={13}
-          />
-        }
-        iconPosition="left"
-        caption={`${5}${" days this week"}`}
-      />
+    <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.heading}>Quiz Level {currentQuizLevel}</h1>
         <Score value={score} max={quizData.length} />
@@ -146,7 +115,7 @@ const Quiz = () => {
           </button>
         </>
       )}
-    </>
+    </div>
   );
 };
 
