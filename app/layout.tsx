@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./styles/reset.css";
 import "./styles/globals.css";
+import { PageContainer } from "./common/Layout";
+import Navigation from "./components/navigation/Navigation";
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -59,7 +61,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${jakartaSans.variable} ${jetBrainsMono.variable}`}>
-        {children}
+        <Navigation />
+        <PageContainer>{children}</PageContainer>
       </body>
     </html>
   );

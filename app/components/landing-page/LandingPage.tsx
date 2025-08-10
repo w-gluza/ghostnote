@@ -1,9 +1,10 @@
+import { Main } from "@/app/common/Layout";
 import styles from "./LandingPage.module.css";
 import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <main className={styles.container}>
+    <Main>
       <section className={styles.hero}>
         <h1 className={styles.title}>🥁 The Ghost Note</h1>
         <p className={styles.subtitle}>Train your ears. Master the groove.</p>
@@ -45,6 +46,6 @@ export default function LandingPage() {
           </a>
         </p>
       </footer>
-    </main>
+    </Main>
   );
 }

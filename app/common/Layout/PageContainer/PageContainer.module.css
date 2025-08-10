@@ -1,0 +1,14 @@
+.page {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  line-height: 1.75;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 2rem;
+    max-width: 860px;
+  }
+}
