@@ -22,9 +22,15 @@
   --color-gray-50: #fcfcfc;
   --color-white: #fafafa;
 
-  --row-height: 6px;
+  --row-height: 5px;
   --note-height: calc(var(--row-height) * 2);
   --note-width: calc(var(--note-height) * 1.4);
+}
+
+@media (min-width: 380px) {
+  :root {
+    --row-height: 6px;
+  }
 }
 
 body {
@@ -33,9 +39,15 @@ body {
   color: var(--color-black);
   background-color: var(--color-white);
   font-size: clamp(0.875rem, 2vw, 1rem);
-  padding: 4rem 2rem 0rem 2rem;
+  padding: 2rem 1rem;
   max-width: 960px;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .body {
+    padding: 4rem 2rem 0rem 2rem;
+  }
 }
 
 p {

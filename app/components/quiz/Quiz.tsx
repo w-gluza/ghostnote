@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import styles from "./Quiz.module.css";
@@ -7,10 +8,11 @@ import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
 import ProgressBar from "@/app/common/ProgressBar/ProgressBar";
 import Score from "@/app/common/Score/Score";
+import { patterns } from "../../data/patterns";
 
 const Quiz = () => {
-  const [patterns, setPatterns] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [patterns, setPatterns] = useState([]);
+  // const [loading, setLoading] = useState(false);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -18,15 +20,15 @@ const Quiz = () => {
   const [isFinished, setIsFinished] = useState(false);
 
   const currentQuizLevel = 3;
-  useEffect(() => {
-    fetch("/api/patterns")
-      .then((res) => res.json())
-      .then((data) => {
-        setPatterns(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/patterns")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setPatterns(data);
+  //       setLoading(false);
+  //     })
+  //     .catch(() => setLoading(false));
+  // }, []);
 
   const quizData = useMemo(() => {
     if (patterns.length === 0) return [];
@@ -35,9 +37,9 @@ const Quiz = () => {
       count: 5,
       difficulty: currentQuizLevel,
     });
-  }, [patterns]);
+  }, []);
 
-  if (loading) return <p>Loading quiz patterns...</p>;
+  // if (loading) return <p>Loading quiz patterns...</p>;
   if (!quizData.length) return <p>No quiz data available.</p>;
 
   const question = quizData[currentQuestion];
