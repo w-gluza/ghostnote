@@ -14,13 +14,13 @@ interface BadgeProps {
   className?: string;
 }
 
-const Badge = ({
+export function Badge({
   label,
   icon,
   iconPosition = "left",
   dataTestId,
   className,
-}: BadgeProps) => {
+}: BadgeProps) {
   return (
     <span className={clsx(styles.badge, className)} data-testid={dataTestId}>
       {icon && iconPosition === "left" && <span>{icon}</span>}
@@ -28,6 +28,4 @@ const Badge = ({
       {icon && iconPosition === "right" && <span>{icon}</span>}
     </span>
   );
-};
-
-export default Badge;
+}

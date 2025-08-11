@@ -5,6 +5,6 @@ type ArticleProps = {
   children: ReactNode;
 };
 
-export const Article = ({ children }: ArticleProps) => {
+export function Article({ children }: ArticleProps) {
   return <article className={styles.article}>{children}</article>;
-};
+}

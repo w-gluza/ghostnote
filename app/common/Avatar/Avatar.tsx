@@ -14,13 +14,13 @@ interface AvatarProps {
   className?: string;
 }
 
-const Avatar = ({
+export function Avatar({
   image,
   fallback,
   size = 64,
   dataTestId,
   className,
-}: AvatarProps) => {
+}: AvatarProps) {
   return (
     <span
       className={clsx(styles.avatar, className)}
@@ -30,6 +30,4 @@ const Avatar = ({
       {image ? image : <span className={styles.fallback}>{fallback}</span>}
     </span>
   );
-};
-
-export default Avatar;
+}

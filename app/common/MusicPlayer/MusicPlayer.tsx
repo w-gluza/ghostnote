@@ -10,13 +10,13 @@ interface MusicPlayerProps {
   onLoopToggle: () => void;
 }
 
-const MusicPlayer = ({
+export function MusicPlayer({
   tempo,
   isPlaying,
   onTempoChange,
   onPlayToggle,
   onLoopToggle,
-}: MusicPlayerProps) => {
+}: MusicPlayerProps) {
   return (
     <div className={styles.card}>
       <div className={styles.control}>
@@ -74,6 +74,6 @@ const MusicPlayer = ({
       </div>
     </div>
   );
-};
+}
 
 export default MusicPlayer;

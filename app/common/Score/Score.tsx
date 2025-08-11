@@ -24,7 +24,7 @@ const clamp = (n: number, min: number, max: number) =>
 
 const range = (n: number) => [...Array(n).keys()];
 
-const Score = ({
+export function Score({
   value,
   max,
   label,
@@ -33,7 +33,7 @@ const Score = ({
   dataTestId,
   className,
   size = 10,
-}: ScoreProps) => {
+}: ScoreProps) {
   const filled = clamp(value, 0, max);
 
   // Decide what to render in the single label area
@@ -75,6 +75,4 @@ const Score = ({
       {labelPosition === "right" && labelElement}
     </div>
   );
-};
-
-export default Score;
+}

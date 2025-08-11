@@ -5,6 +5,6 @@ type PageContainerProps = {
   children: ReactNode;
 };
 
-export const PageContainer = ({ children }: PageContainerProps) => {
+export function PageContainer({ children }: PageContainerProps) {
   return <div className={styles.page}>{children}</div>;
-};
+}

@@ -12,13 +12,13 @@ interface NoteProps {
   visualMode?: "svg" | "simplified";
 }
 
-const Note: React.FC<NoteProps> = ({
+export function Note({
   row,
   column = 1,
   velocity,
   midi,
   visualMode = "simplified",
-}) => {
+}: NoteProps) {
   const { defaultStyle, svgIcon } = getNoteVisual(midi);
   const style = visualMode === "svg" ? "svg" : defaultStyle;
 
@@ -35,6 +35,4 @@ const Note: React.FC<NoteProps> = ({
       )}
     </div>
   );
-};
-
-export default Note;
+}

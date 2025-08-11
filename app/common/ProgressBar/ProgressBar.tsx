@@ -17,13 +17,13 @@ interface ProgressBarProps {
 const clamp = (n: number, min = 0, max = 100) =>
   Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : 0;
 
-const ProgressBar = ({
+export function ProgressBar({
   percentage,
   labelText,
   labelPosition = "top-left",
   dataTestId,
   className,
-}: ProgressBarProps) => {
+}: ProgressBarProps) {
   const pct = Math.round(clamp(percentage));
   const reactId = useId();
   const labelId = labelText ? `progressbar-label-${reactId}` : undefined;
@@ -55,6 +55,4 @@ const ProgressBar = ({
       </div>
     </div>
   );
-};
-
-export default ProgressBar;
+}

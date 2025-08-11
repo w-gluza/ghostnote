@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MusicStaff.module.css";
-import Note from "../Note/Note";
+import { Note } from "../Note/Note";
 import {
   midiPositionMap,
   MidiNoteValue,
@@ -14,12 +14,12 @@ interface MusicStaffProps {
   label?: string;
 }
 
-const MusicStaff = ({
+export function MusicStaff({
   pattern,
   tempo,
   timeSignature,
   label,
-}: MusicStaffProps) => {
+}: MusicStaffProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.meta}>
@@ -71,6 +71,4 @@ const MusicStaff = ({
       </div>
     </div>
   );
-};
-
-export default MusicStaff;
+}

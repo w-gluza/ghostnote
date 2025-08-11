@@ -8,12 +8,12 @@ interface PatternCardProps {
   children: ReactNode;
 }
 
-const PatternCard = ({
+export function PatternCard({
   label,
   selected,
   onSelect,
   children,
-}: PatternCardProps) => {
+}: PatternCardProps) {
   return (
     <div
       className={`${styles.card} ${selected ? styles.selected : ""}`}
@@ -26,6 +26,4 @@ const PatternCard = ({
       {children}
     </div>
   );
-};
-
-export default PatternCard;
+}

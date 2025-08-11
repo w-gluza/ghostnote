@@ -25,7 +25,7 @@ const clamp = (n: number, min: number, max: number) =>
 
 const range = (n: number) => [...Array(n).keys()];
 
-export default function Streak({
+export function Streak({
   value,
   max,
   label = "Streak",

@@ -15,7 +15,7 @@ interface NavProps {
   className?: string;
 }
 
-export default function Nav({ links, className }: NavProps) {
+export function Nav({ links, className }: NavProps) {
   const pathname = usePathname();
 
   return (
