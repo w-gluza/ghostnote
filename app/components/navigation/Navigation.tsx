@@ -1,7 +1,7 @@
-import Nav, { NavLink } from "@/app/common/Nav/Nav";
 import styles from "./Navigation.module.css";
+import { Nav } from "@/app/common/";
 
-const LINKS: NavLink[] = [
+const LINKS = [
   { label: "Home", href: "/" },
   { label: "Profile", href: "/profile" },
   { label: "Quiz", href: "/quiz" },

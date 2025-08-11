@@ -2,13 +2,13 @@ import Image from "next/image";
 import clsx from "clsx";
 import styles from "./ActivityList.module.css";
 import { ActivityItem } from "../../types";
+import { Card } from "@/app/common";
 
 interface ActivityListProps {
   items: ActivityItem[];
   heading?: string;
   subheading?: string;
   className?: string;
-  dataTestId?: string;
   dividers?: boolean;
 }
 
@@ -16,16 +16,10 @@ export default function ActivityList({
   items,
   heading,
   subheading,
-  className,
-  dataTestId,
   dividers = true,
 }: ActivityListProps) {
   return (
-    <section
-      className={clsx(styles.card, className)}
-      data-testid={dataTestId}
-      aria-label={heading || "Recent activity"}
-    >
+    <Card>
       {(heading || subheading) && (
         <header className={styles.header}>
           {heading && <h3 className={styles.title}>{heading}</h3>}
@@ -82,6 +76,6 @@ export default function ActivityList({
           </ul>
         )}
       </div>
-    </section>
+    </Card>
   );
 }

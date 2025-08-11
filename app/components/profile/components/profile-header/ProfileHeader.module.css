@@ -4,30 +4,21 @@
   gap: 16px;
 }
 
-.headerLeft {
+/* Profile header styles */
+.about {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.avatarWrap {
-  flex-shrink: 0;
-}
-
 .title {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
-.name {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.handle {
+.handle,
+.meta {
   margin: 0;
   font-size: 0.875rem;
   color: var(--color-gray-600);
@@ -38,22 +29,12 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  font-size: 0.875rem;
-  color: var(--color-gray-600);
 }
 
-.metaItem {
+.meta-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.icon {
-  display: inline-flex;
-}
-.icon :where(svg) {
-  width: 14px;
-  height: 14px;
 }
 
 .sep {
@@ -62,18 +43,19 @@
   background: var(--color-gray-300);
 }
 
-.headerRight {
+/* Skills section */
+.skills-wrap {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.badgeRow {
+.skill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.badgeLabel {
+.skill-label {
   font-size: 0.875rem;
   color: var(--color-gray-600);
 }

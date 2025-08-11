@@ -2,17 +2,13 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import styles from "./Quiz.module.css";
-import MusicStaff from "@/app/common/MusicStaff/MusicStaff";
-import PatternCard from "@/app/common/PatternCard/PatternCard";
 import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
-import ProgressBar from "@/app/common/ProgressBar/ProgressBar";
-import Score from "@/app/common/Score/Score";
-import { patterns } from "../../data/patterns";
+import { MusicStaff, PatternCard, ProgressBar, Score } from "@/app/common";
 
 const Quiz = () => {
-  // const [patterns, setPatterns] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [patterns, setPatterns] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -20,15 +16,15 @@ const Quiz = () => {
   const [isFinished, setIsFinished] = useState(false);
 
   const currentQuizLevel = 3;
-  // useEffect(() => {
-  //   fetch("/api/patterns")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPatterns(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(() => setLoading(false));
-  // }, []);
+  useEffect(() => {
+    fetch("/api/patterns")
+      .then((res) => res.json())
+      .then((data) => {
+        setPatterns(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   const quizData = useMemo(() => {
     if (patterns.length === 0) return [];
@@ -37,7 +33,7 @@ const Quiz = () => {
       count: 5,
       difficulty: currentQuizLevel,
     });
-  }, []);
+  }, [patterns, currentQuizLevel]);
 
   // if (loading) return <p>Loading quiz patterns...</p>;
   if (!quizData.length) return <p>No quiz data available.</p>;

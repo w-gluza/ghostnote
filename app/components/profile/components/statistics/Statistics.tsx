@@ -1,15 +1,19 @@
 import Image from "next/image";
-import clsx from "clsx";
-import Streak from "@/app/common/Streak/Streak";
-import Score from "@/app/common/Score/Score";
-import ProgressBar from "@/app/common/ProgressBar/ProgressBar";
 import styles from "./Statistics.module.css";
 import { ProfileData } from "../../types";
+import {
+  Streak,
+  Score,
+  ProgressBar,
+  Card,
+  CardHeader,
+  CardTitle,
+} from "@/app/common";
 
 function Statistics({ user }: { user: ProfileData }) {
   return (
     <section className={styles.grid}>
-      <div className={clsx(styles.card)}>
+      <Card>
         <Streak
           value={user.streak}
           max={user.streakMax}
@@ -23,29 +27,29 @@ function Statistics({ user }: { user: ProfileData }) {
           }
           caption={`${user.streak} days in a row`}
         />
-      </div>
+      </Card>
 
-      <div className={clsx(styles.card)}>
-        <div className={styles.cardHeader}>
-          <span className={styles.cardTitle}>Best Score</span>
-        </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className={styles.cardTitle}>Best Score</CardTitle>
+        </CardHeader>
         <Score
           value={user.scoreValue}
           max={user.scoreMax}
           labelPosition="left"
         />
-      </div>
+      </Card>
 
-      <div className={clsx(styles.card)}>
-        <div className={styles.cardHeader}>
-          <span className={styles.cardTitle}>Level Progress</span>
-        </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className={styles.cardTitle}>Level Progress</CardTitle>
+        </CardHeader>
         <ProgressBar
           percentage={user.progressPct}
           labelText={`${user.progressPct}%`}
           labelPosition="top-right"
         />
-      </div>
+      </Card>
     </section>
   );
 }
