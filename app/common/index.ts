@@ -1,5 +1,6 @@
 export * from "./Avatar/Avatar";
 export * from "./Badge/Badge";
+export * from "./Button/Button";
 export * from "./Card/Card";
 export * from "./Card/CardButton";
 export * from "./Card/CardTitle";
@@ -8,6 +9,7 @@ export * from "./Heading/Heading";
 export * from "./Layout/Article/Article";
 export * from "./Layout/Main/Main";
 export * from "./Layout/PageContainer/PageContainer";
+export * from "./Link/ButtonLink";
 export * from "./MusicPlayer/MusicPlayer";
 export * from "./MusicStaff/MusicStaff";
 export * from "./Nav/Nav";
