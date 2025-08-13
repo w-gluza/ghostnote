@@ -1,0 +1,36 @@
+import type { UserInterface } from "../types/user.ts";
+
+export const users: UserInterface[] = [
+  {
+    email: "demo@test.com",
+    handle: "rhythm_master",
+    name: "Demo User",
+    location: "Germany",
+    lastPlayedAt: new Date("2025-08-12T15:30:00Z"),
+    lastPlayedText: "Yesterday afternoon",
+    streak: 7,
+    streakMax: 15,
+    scoreValue: 3,
+    scoreMax: 5,
+    progressPct: 48,
+    skill: "Advanced",
+    createdAt: new Date("2025-07-20T12:00:00Z"),
+    updatedAt: new Date("2025-08-13T10:00:00Z"),
+  },
+  {
+    email: "luna@example.com",
+    handle: "luna_keys",
+    name: "Luna Park",
+    location: "Australia",
+    lastPlayedAt: new Date("2025-08-13T07:45:00Z"),
+    lastPlayedText: "This morning",
+    streak: 12,
+    streakMax: 20,
+    scoreValue: 4,
+    scoreMax: 5,
+    progressPct: 58,
+    skill: "Expert",
+    createdAt: new Date("2025-06-05T08:30:00Z"),
+    updatedAt: new Date("2025-08-13T07:50:00Z"),
+  },
+];

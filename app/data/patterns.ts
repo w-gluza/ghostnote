@@ -1,6 +1,6 @@
-import type { PatternDefinition } from "@/app/types/patterns";
+import type { PatternInterface } from "../types/patterns.ts";
 
-export const patterns: PatternDefinition[] = [
+export const patterns: PatternInterface[] = [
   {
     id: 1,
     name: "Disco Beat",

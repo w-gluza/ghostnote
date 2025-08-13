@@ -7,12 +7,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ActivityType {
+  QUIZ
+  PRACTICE
+}
+
+// Structured activity; render UI strings from these fields
+model Activity {
+  id               String       @id @default(uuid())
+  userId           String
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type             ActivityType
+  occurredAt       DateTime     @db.Timestamptz @default(now()) 
+  topic            String?      
+  durationSeconds  Int?         
+  scoreCorrect     Int?
+  scoreTotal       Int?
+  strikes          Int?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  @@index([userId, occurredAt(sort: Desc)])
+}
+
 model User {
-  id      String       @id @default(uuid())
-  email   String       @unique
-  nick    String       @unique
-  xp      Int          @default(0)
-  level   Int          @default(1)
+  id             String    @id @default(uuid())
+  email          String    @unique
+  handle         String    @unique   // instead of nick
+
+  name           String
+  location       String
+  lastPlayedAt   DateTime? @db.Timestamptz
+  lastPlayedText String?
+
+  streak         Int       @default(0)
+  streakMax      Int       @default(0)
+  scoreValue     Int       @default(0)
+  scoreMax       Int       @default(0)
+  progressPct    Int       @default(0)
+  skill          String
+
+  activities     Activity[]
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
 
 model Pattern {

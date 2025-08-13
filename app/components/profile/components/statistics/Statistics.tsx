@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./Statistics.module.css";
-import { ProfileData } from "../../types";
+import type { UserInterface } from "../../../../types/user";
 import {
   Streak,
   Score,
@@ -10,13 +10,13 @@ import {
   CardTitle,
 } from "@/app/common";
 
-function Statistics({ user }: { user: ProfileData }) {
+function Statistics({ user }: { user: UserInterface }) {
   return (
     <section className={styles.grid}>
       <Card>
         <Streak
-          value={user.streak}
-          max={user.streakMax}
+          value={user.streak || 0}
+          max={user.streakMax || 5}
           icon={
             <Image
               src="/icons/app/flame.svg"
@@ -34,8 +34,8 @@ function Statistics({ user }: { user: ProfileData }) {
           <CardTitle className={styles.cardTitle}>Best Score</CardTitle>
         </CardHeader>
         <Score
-          value={user.scoreValue}
-          max={user.scoreMax}
+          value={user.scoreValue || 0}
+          max={user.scoreMax || 5}
           labelPosition="left"
         />
       </Card>
@@ -45,7 +45,7 @@ function Statistics({ user }: { user: ProfileData }) {
           <CardTitle className={styles.cardTitle}>Level Progress</CardTitle>
         </CardHeader>
         <ProgressBar
-          percentage={user.progressPct}
+          percentage={user.progressPct || 0}
           labelText={`${user.progressPct}%`}
           labelPosition="top-right"
         />

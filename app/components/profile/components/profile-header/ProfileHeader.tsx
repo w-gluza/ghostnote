@@ -1,13 +1,13 @@
 import Image from "next/image";
 import clsx from "clsx";
 import styles from "./ProfileHeader.module.css";
-import { ProfileData } from "../../types";
 import { Avatar, Badge, Heading } from "@/app/common";
+import type { UserInterface } from "../../../../types/user";
 
 export default function ProfileHeader({
-  user: { name, handle, location, lastPlayed, skill },
+  user: { name, handle, location, lastPlayedText, skill },
 }: {
-  user: ProfileData;
+  user: UserInterface;
 }) {
   return (
     <section className={clsx(styles.header)}>
@@ -42,7 +42,7 @@ export default function ProfileHeader({
                   height={14}
                 />
               </span>
-              {lastPlayed}
+              {lastPlayedText}
             </span>
           </div>
         </div>

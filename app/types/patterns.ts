@@ -2,7 +2,7 @@ import type { MidiNoteValue, VelocityValue } from "@/app/utils/midiMap";
 export type StepLength = 4 | 8 | 16 | 32;
 export type Pattern = Array<[MidiNoteValue, VelocityValue][]>;
 
-export interface PatternDefinition {
+export interface PatternInterface {
   id: number;
   name: string;
   bpm: number;
@@ -15,6 +15,6 @@ export interface PatternDefinition {
 
 export interface QuizQuestion {
   correctPatternId: number;
-  options: PatternDefinition[];
+  options: PatternInterface[];
   stepLength: StepLength;
 }
