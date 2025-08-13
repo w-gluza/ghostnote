@@ -1,4 +1,4 @@
-import NextLink, { LinkProps } from "next/link";
+import NextLink, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import clsx from "clsx";
 import styles from "./Link.module.css";

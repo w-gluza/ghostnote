@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import styles from "./PatternCard.module.css";
 
 interface PatternCardProps {
@@ -22,6 +22,7 @@ export function PatternCard({
       aria-pressed={selected}
       aria-label={`Select pattern ${label}`}
       onClick={onSelect}
+      onKeyDown={onSelect}
     >
       {children}
     </div>

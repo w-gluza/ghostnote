@@ -1,4 +1,4 @@
-import { ReactNode, ElementType, JSX } from "react";
+import type { ElementType, JSX, ReactNode } from "react";
 import clsx from "clsx";
 import styles from "./Heading.module.css";
 

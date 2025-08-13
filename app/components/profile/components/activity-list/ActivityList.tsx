@@ -60,7 +60,7 @@ export default function ActivityList({
         {data.items.length === 0 ? (
           <p className={styles.empty}>No recent activity.</p>
         ) : (
-          <ul className={styles.list} role="list">
+          <ul className={styles.list}>
             {data.items.map((it: ActivityInterface) => {
               const isQuiz = it.type === "QUIZ";
               const iconSrc = isQuiz
