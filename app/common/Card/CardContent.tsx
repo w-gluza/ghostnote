@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import styles from "./Card.module.css";
+import type { ReactNode } from "react";
 
 export interface CardContentProps {
   /** Content inside the card */
