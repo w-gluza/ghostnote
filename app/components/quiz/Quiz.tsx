@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./Quiz.module.css";
 import DrumMachine from "./components/drum-machine/DrumMachine";
-import { useQuiz } from "./hooks/useQuiz";
+import { useQuiz } from "@/app/hooks/useQuiz";
 import {
   Button,
   Heading,

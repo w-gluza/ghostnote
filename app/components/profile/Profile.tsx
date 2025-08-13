@@ -3,7 +3,7 @@ import styles from "./Profile.module.css";
 import Statistics from "./components/statistics/Statistics";
 import ProfileHeader from "./components/profile-header/ProfileHeader";
 import ActivityList from "./components/activity-list/ActivityList";
-import { useUser } from "./hooks/useUser";
+import { useUser } from "@/app/hooks/useUser";
 
 export default function Profile() {
   const {

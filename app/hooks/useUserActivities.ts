@@ -1,7 +1,7 @@
 "use client";
 import useSWR from "swr";
 import { fetchJson } from "@/app/utils/fetchJson";
-import { ActivityInterface } from "../../../types/user";
+import { ActivityInterface } from "../types/user";
 
 export interface UserActivitiesResponse {
   items: ActivityInterface[];

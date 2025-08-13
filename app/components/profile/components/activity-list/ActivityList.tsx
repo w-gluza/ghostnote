@@ -1,11 +1,10 @@
 "use client";
-
 import Image from "next/image";
 import clsx from "clsx";
 import styles from "./ActivityList.module.css";
 import type { ActivityInterface } from "../../../../types/user";
 import { Card } from "@/app/common";
-import { useUserActivities } from "../../hooks/useUserActivities";
+import { useUserActivities } from "@/app/hooks/useUserActivities";
 
 interface ActivityListProps {
   heading?: string;
