@@ -1,50 +1,58 @@
 import { Main } from "@/app/common/Layout";
 import styles from "./LandingPage.module.css";
-import Link from "next/link";
+import {
+  ButtonLink,
+  Card,
+  CardTitle,
+  CardContent,
+  CardHeader,
+  ExternalLink,
+  Heading,
+} from "@/app/common";
 
 export default function LandingPage() {
   return (
     <Main>
-      <section className={styles.hero}>
-        <h1 className={styles.title}>🥁 The Ghost Note</h1>
+      <header className={styles.hero}>
+        <Heading level={1} className={styles.title}>
+          🥁 The Ghost Note
+        </Heading>
         <p className={styles.subtitle}>Train your ears. Master the groove.</p>
-        <Link href="/quiz" className={styles.cta}>
-          Start Practicing
-        </Link>
-      </section>
+        <ButtonLink href="/quiz">Start Practicing</ButtonLink>
+      </header>
 
-      <section className={styles.featuresHorizontal}>
-        <div className={styles.featureItem}>
-          <h3>🎮 Groove Quizzes</h3>
-          <p>Listen and match the right drum pattern. Fun and challenging.</p>
-        </div>
-        <div className={styles.featureItem}>
-          <h3>🔥 XP & Level System</h3>
-          <p>Earn XP, level up, and track your progress over time.</p>
-        </div>
-        <div className={styles.featureItem}>
-          <h3>🎧 Real Drum Patterns</h3>
-          <p>Based on real grooves. Improve your timing and feel.</p>
-        </div>
-      </section>
-
-      <section className={styles.preview}>
-        <div className={styles.previewBox}>
-          <p>[ Screenshot or Animation Placeholder ]</p>
-        </div>
-      </section>
+      <article className={styles.features}>
+        <Card variant="secondary">
+          <CardHeader>
+            <CardTitle>🎮 Groove Quizzes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            Listen and match the right drum pattern. Fun and challenging!
+          </CardContent>
+        </Card>
+        <Card variant="secondary">
+          <CardHeader>
+            <CardTitle>🔥 XP & Level System</CardTitle>
+          </CardHeader>
+          <CardContent>
+            Earn XP, level up, and track your progress over time.
+          </CardContent>
+        </Card>
+        <Card variant="secondary">
+          <CardHeader>
+            <CardTitle>🎧 Real Drum Patterns</CardTitle>
+          </CardHeader>
+          <CardContent>
+            Based on real grooves. Improve your timing and feel.
+          </CardContent>
+        </Card>
+      </article>
 
       <footer className={styles.footer}>
         <p>Built with Next.js, CSS Modules, and Supabase</p>
-        <p>
-          <a
-            href="https://github.com/w-gluza/ghostnote"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub
-          </a>
-        </p>
+        <ExternalLink href="https://github.com/w-gluza/ghostnote">
+          View on GitHub
+        </ExternalLink>
       </footer>
     </Main>
   );

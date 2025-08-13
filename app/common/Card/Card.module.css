@@ -1,11 +1,18 @@
 .card {
+  background: var(--color-white);
+}
+
+.primary {
+  padding: 16px;
   border: 1px solid var(--color-gray-300);
   border-radius: 8px;
-  padding: 16px;
-  background: var(--color-white);
   transition:
     border-color 0.35s ease,
     box-shadow 0.35s ease;
+}
+
+.secondary {
+  padding: 0px;
 }
 
 /* Only interactive cards get hover styles */
@@ -40,4 +47,10 @@
 .card-title {
   font-size: 0.95rem;
   font-weight: 600;
+}
+
+.card-content {
+  color: var(--color-gray-600);
+  margin: 0;
+  font-size: 0.875rem;
 }

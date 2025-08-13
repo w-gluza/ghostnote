@@ -5,6 +5,8 @@ export * from "./Card/Card";
 export * from "./Card/CardButton";
 export * from "./Card/CardTitle";
 export * from "./Card/CardHeader";
+export * from "./Card/CardContent";
+export * from "./ExternalLink/ExternalLink";
 export * from "./Heading/Heading";
 export * from "./Layout/Article/Article";
 export * from "./Layout/Main/Main";

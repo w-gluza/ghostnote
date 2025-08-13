@@ -11,8 +11,8 @@ const user: ProfileData = {
   lastPlayed: "Last played 2 hours ago",
   streak: 5,
   streakMax: 7,
-  scoreValue: 7,
-  scoreMax: 10,
+  scoreValue: 3,
+  scoreMax: 5,
   progressPct: 62,
   skill: "Intermediate",
 };

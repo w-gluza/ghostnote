@@ -3,8 +3,8 @@ import { Nav } from "@/app/common/";
 
 const LINKS = [
   { label: "Home", href: "/" },
-  { label: "Profile", href: "/profile" },
   { label: "Quiz", href: "/quiz" },
+  { label: "Profile", href: "/profile" },
 ];
 
 export default function Navigation() {

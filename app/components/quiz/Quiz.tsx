@@ -1,10 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import styles from "./Quiz.module.css";
 import DrumMachine from "../drum-machine/DrumMachine";
 import { generateQuiz } from "@/app/utils/generateQuiz";
-import { MusicStaff, PatternCard, ProgressBar, Score } from "@/app/common";
+import {
+  Heading,
+  MusicStaff,
+  PatternCard,
+  ProgressBar,
+  Score,
+} from "@/app/common";
 
 const Quiz = () => {
   const [patterns, setPatterns] = useState([]);
@@ -35,7 +40,7 @@ const Quiz = () => {
     });
   }, [patterns, currentQuizLevel]);
 
-  // if (loading) return <p>Loading quiz patterns...</p>;
+  if (loading) return <p>Loading quiz patterns...</p>;
   if (!quizData.length) return <p>No quiz data available.</p>;
 
   const question = quizData[currentQuestion];
@@ -65,7 +70,9 @@ const Quiz = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.heading}>Quiz Level {currentQuizLevel}</h1>
+        <Heading level={1} className={styles.subheading}>
+          Quiz Level {currentQuizLevel}
+        </Heading>
         <Score value={score} max={quizData.length} />
       </header>
       {!isFinished && (
