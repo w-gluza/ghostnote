@@ -87,8 +87,13 @@ const Quiz = ({ level = 3, count = 5 }: { level?: number; count?: number }) => {
     }
   };
 
-  const handleRetry = async () => {
-    await refresh();
+  const handleRetry = () => {
+    // Immediate UI reset
+    setCurrentQuestion(0);
+    setSelectedIndex(null);
+    setScore(0);
+    setIsFinished(false);
+    refresh(); // Re-fetch patterns to reset quiz
   };
 
   return (

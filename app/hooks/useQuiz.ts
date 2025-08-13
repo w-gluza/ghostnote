@@ -1,14 +1,11 @@
+// useQuiz.ts
 "use client";
-import { useMemo } from "react";
+import { useEffect, useState, useCallback } from "react";
 import useSWR from "swr";
 import { fetchJson } from "@/app/utils/fetchJson";
 import { generateQuiz } from "@/app/utils/generateQuiz";
 import type { PatternInterface, QuizQuestion } from "@/app/types/patterns";
 
-/**
- * Fetch patterns and build a quiz client-side.
- * TO DO - consider server-side filtering
- */
 export function useQuiz({
   level,
   count = 5,
@@ -18,9 +15,12 @@ export function useQuiz({
   count?: number;
   enabled?: boolean;
 }) {
+  const [nonce, setNonce] = useState(0);
+  const [quiz, setQuiz] = useState<QuizQuestion[]>([]);
+
   const key = !enabled ? null : `/api/patterns`;
 
-  const { data, error, isLoading, mutate } = useSWR<PatternInterface[]>(
+  const { data, error, isLoading } = useSWR<PatternInterface[]>(
     key,
     fetchJson,
     {
@@ -29,10 +29,17 @@ export function useQuiz({
     }
   );
 
-  const quiz: QuizQuestion[] = useMemo(() => {
-    if (!data?.length) return [];
-    return generateQuiz({ patterns: data, count, difficulty: level });
-  }, [data, count, level]);
+  useEffect(() => {
+    if (!data?.length) return;
+    setQuiz(generateQuiz({ patterns: data, count, difficulty: level }));
+  }, [data, count, level, nonce]);
 
-  return { quiz, error, isLoading, refresh: mutate };
+  // Refresh function to regenerate quiz without refetching patterns
+  // Just for testing purposes
+  // In production, this should be handled by backend
+  const refresh = useCallback(() => {
+    setNonce((n) => n + 1);
+  }, []);
+
+  return { quiz, error, isLoading, refresh: refresh };
 }
