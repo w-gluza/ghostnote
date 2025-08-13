@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import styles from "./Quiz.module.css";
-import DrumMachine from "../drum-machine/DrumMachine";
-import { generateQuiz } from "@/app/utils/generateQuiz";
+import DrumMachine from "./components/drum-machine/DrumMachine";
+import { useQuiz } from "./hooks/useQuiz";
 import {
   Heading,
   MusicStaff,
@@ -12,38 +12,25 @@ import {
 } from "@/app/common";
 
 const Quiz = () => {
-  const [patterns, setPatterns] = useState([]);
-  const [loading, setLoading] = useState(false);
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
   const currentQuizLevel = 3;
-  useEffect(() => {
-    fetch("/api/patterns")
-      .then((res) => res.json())
-      .then((data) => {
-        setPatterns(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+  const {
+    quiz,
+    error: quizError,
+    isLoading: quizLoading,
+  } = useQuiz({
+    level: currentQuizLevel,
+    count: 5,
+  });
 
-  const quizData = useMemo(() => {
-    if (patterns.length === 0) return [];
-    return generateQuiz({
-      patterns,
-      count: 5,
-      difficulty: currentQuizLevel,
-    });
-  }, [patterns, currentQuizLevel]);
+  if (quizLoading) return <p>Loading quiz patterns...</p>;
+  if (!quiz.length || quizError) return <p>No quiz data available.</p>;
 
-  if (loading) return <p>Loading quiz patterns...</p>;
-  if (!quizData.length) return <p>No quiz data available.</p>;
-
-  const question = quizData[currentQuestion];
+  const question = quiz[currentQuestion];
   const correctPattern = question.options.find(
     (p) => p.id === question.correctPatternId
   );
@@ -59,7 +46,7 @@ const Quiz = () => {
     ) {
       setScore((s) => s + 1);
     }
-    if (currentQuestion + 1 < quizData.length) {
+    if (currentQuestion + 1 < quiz.length) {
       setCurrentQuestion((q) => q + 1);
       setSelectedIndex(null);
     } else {
@@ -73,7 +60,7 @@ const Quiz = () => {
         <Heading level={1} className={styles.subheading}>
           Quiz Level {currentQuizLevel}
         </Heading>
-        <Score value={score} max={quizData.length} />
+        <Score value={score} max={quiz.length} />
       </header>
       {!isFinished && (
         <>
@@ -89,7 +76,7 @@ const Quiz = () => {
           </div>
           <ProgressBar
             percentage={25}
-            labelText={`Question ${currentQuestion + 1} of ${quizData.length}`}
+            labelText={`Question ${currentQuestion + 1} of ${quiz.length}`}
             labelPosition={"top-right"}
           />
 
@@ -116,7 +103,7 @@ const Quiz = () => {
             className={styles.submit}
             disabled={selectedIndex === null}
           >
-            {currentQuestion + 1 === quizData.length ? "Finish Quiz" : "Next"}
+            {currentQuestion + 1 === quiz.length ? "Finish Quiz" : "Next"}
           </button>
         </>
       )}

@@ -1,7 +1,7 @@
-import type { PatternDefinition, QuizQuestion } from "@/app/types/patterns";
+import type { PatternInterface, QuizQuestion } from "@/app/types/patterns";
 
 interface QuizGenerationOptions {
-  patterns: PatternDefinition[];
+  patterns: PatternInterface[];
   count: number; // Number of questions
   optionsPerQuestion?: number; // Default 4
   difficulty?: number; // Optional filter by difficulty level

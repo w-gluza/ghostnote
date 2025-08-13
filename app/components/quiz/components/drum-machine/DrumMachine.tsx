@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import MusicPlayer from "../../common/MusicPlayer/MusicPlayer";
+import MusicPlayer from "@/app/common/MusicPlayer/MusicPlayer";
 import { useDrumSampler } from "@/app/hooks/useDrumSampler";
 import type { Pattern } from "@/app/types/patterns";
 
