@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import type { MidiNoteValue } from "@/app/utils/midiMap";
 import type { Pattern } from "@/app/types/patterns";
 import { velocityToGain } from "../utils/tone";
@@ -150,7 +150,8 @@ export function useDrumSampler(pattern: Pattern, stepLength: StepsLength) {
   /**
    * Stops transport and clears any scheduled events.
    */
-  const stop = () => {
+
+  const stop = useCallback(() => {
     const transport = transportRef.current;
     if (!transport) return;
 
@@ -162,7 +163,7 @@ export function useDrumSampler(pattern: Pattern, stepLength: StepsLength) {
     }
 
     setIsPlaying(false);
-  };
+  }, []);
 
   /**
    * Toggles playback on/off.

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import MusicPlayer from "@/app/common/MusicPlayer/MusicPlayer";
 import { useDrumSampler } from "@/app/hooks/useDrumSampler";
 import type { Pattern } from "@/app/types/patterns";
@@ -12,17 +12,18 @@ interface DrumMachineProps {
 }
 
 const DrumMachine = ({ pattern, repeat = 2, stepLength }: DrumMachineProps) => {
-  // NOTE: This is a quick and practical way to repeat the pattern.
-  // It's not musically aware — we simply duplicate the raw pattern array.
-  // In real-world music, patterns are often structured in 2-bar or 4-bar phrases.
   const passedPattern = Array(repeat)
     .fill(null)
     .flatMap(() => pattern);
 
-  const { isPlaying, bpm, setBpm, loop, setLoop, toggle } = useDrumSampler(
-    passedPattern,
-    stepLength
-  );
+  const { isPlaying, bpm, setBpm, loop, setLoop, toggle, stop } =
+    useDrumSampler(passedPattern, stepLength);
+
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
 
   return (
     <MusicPlayer

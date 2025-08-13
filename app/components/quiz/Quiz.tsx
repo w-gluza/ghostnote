@@ -115,6 +115,7 @@ const Quiz = ({ level = 3, count = 5 }: { level?: number; count?: number }) => {
           <div className={styles["player-container"]}>
             {correctPattern && (
               <DrumMachine
+                key={correctPattern.id}
                 pattern={correctPattern.pattern}
                 stepLength={question.stepLength}
               />
