@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./Quiz.module.css";
 import DrumMachine from "./components/drum-machine/DrumMachine";
 import { useQuiz } from "./hooks/useQuiz";
 import {
+  Button,
   Heading,
   MusicStaff,
   PatternCard,
@@ -11,75 +12,119 @@ import {
   Score,
 } from "@/app/common";
 
-const Quiz = () => {
+// Dummy placeholder until a real API call is wired
+async function submitQuiz({
+  score,
+  quizLevel,
+}: {
+  score: number;
+  quizLevel: number;
+}) {
+  console.log("Submitting quiz results", { score, quizLevel });
+  // Simulate a network request
+  return new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
+const Quiz = ({ level = 3, count = 5 }: { level?: number; count?: number }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
-  const currentQuizLevel = 3;
   const {
     quiz,
     error: quizError,
     isLoading: quizLoading,
-  } = useQuiz({
-    level: currentQuizLevel,
-    count: 5,
-  });
+    refresh,
+  } = useQuiz({ level, count });
 
-  if (quizLoading) return <p>Loading quiz patterns...</p>;
-  if (!quiz.length || quizError) return <p>No quiz data available.</p>;
+  useEffect(() => {
+    setCurrentQuestion(0);
+    setSelectedIndex(null);
+    setScore(0);
+    setIsFinished(false);
+  }, [quiz]);
 
-  const question = quiz[currentQuestion];
-  const correctPattern = question.options.find(
-    (p) => p.id === question.correctPatternId
+  const total = quiz.length;
+  const question = useMemo(
+    () => quiz[currentQuestion],
+    [quiz, currentQuestion]
+  );
+  const correctPattern = useMemo(
+    () => question?.options.find((p) => p.id === question.correctPatternId),
+    [question]
   );
 
-  const handleSelect = (index: number) => {
-    setSelectedIndex(index);
-  };
+  const percentage = useMemo(() => {
+    if (!total) return 0;
+    const answered = isFinished ? total : currentQuestion;
+    return Math.round((answered / total) * 100);
+  }, [currentQuestion, isFinished, total]);
 
-  const handleSubmit = () => {
-    if (
-      selectedIndex !== null &&
-      question.options[selectedIndex].id === question.correctPatternId
-    ) {
-      setScore((s) => s + 1);
-    }
-    if (currentQuestion + 1 < quiz.length) {
-      setCurrentQuestion((q) => q + 1);
+  if (quizLoading) return <p>Loading quiz patterns...</p>;
+  if (quizError) return <p role="alert">Failed to load quiz data.</p>;
+  if (!total) return <p>No quiz data available.</p>;
+
+  const handleSelect = (index: number) => setSelectedIndex(index);
+
+  const handleSubmit = async () => {
+    if (!question || selectedIndex === null) return;
+
+    const isCorrect =
+      question.options[selectedIndex].id === question.correctPatternId;
+    if (isCorrect) setScore((s) => s + 1);
+
+    const nextIndex = currentQuestion + 1;
+    if (nextIndex < total) {
+      setCurrentQuestion(nextIndex);
       setSelectedIndex(null);
     } else {
       setIsFinished(true);
+      await submitQuiz({
+        score: isCorrect ? score + 1 : score,
+        quizLevel: level,
+      });
     }
+  };
+
+  const handleRetry = async () => {
+    await refresh();
   };
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Heading level={1} className={styles.subheading}>
-          Quiz Level {currentQuizLevel}
+        <Heading level={1}>
+          {!isFinished ? `Quiz Level ${level}` : `Results`}
         </Heading>
-        <Score value={score} max={quiz.length} />
+        <Score value={score} max={total} />
       </header>
-      {!isFinished && (
-        <>
-          <p className={styles.instruction}>
-            Listen to the pattern and select the matching music staff.
-          </p>
 
+      {!isFinished ? (
+        <p className={styles.instruction}>
+          Listen to the pattern and select the matching music staff.
+        </p>
+      ) : (
+        <p className={styles.instruction}>
+          You scored <strong>{score}</strong> out of <strong>{total}</strong>.
+        </p>
+      )}
+
+      {!isFinished ? (
+        <>
           <div className={styles["player-container"]}>
-            <DrumMachine
-              pattern={correctPattern!.pattern}
-              stepLength={question.stepLength}
-            />
+            {correctPattern && (
+              <DrumMachine
+                pattern={correctPattern.pattern}
+                stepLength={question.stepLength}
+              />
+            )}
           </div>
           <ProgressBar
-            percentage={25}
-            labelText={`Question ${currentQuestion + 1} of ${quiz.length}`}
+            percentage={percentage}
+            labelText={`Question ${currentQuestion + 1} of ${total}`}
             labelPosition={"top-right"}
           />
-
           <div className={styles.grid}>
             {question.options.map((option, index) => (
               <PatternCard
@@ -87,6 +132,7 @@ const Quiz = () => {
                 label={option.name}
                 selected={selectedIndex === index}
                 onSelect={() => handleSelect(index)}
+                aria-label={`Select ${option.name}`}
               >
                 <MusicStaff
                   pattern={option.pattern}
@@ -97,15 +143,26 @@ const Quiz = () => {
               </PatternCard>
             ))}
           </div>
-
-          <button
+          <Button
             onClick={handleSubmit}
-            className={styles.submit}
             disabled={selectedIndex === null}
+            aria-disabled={selectedIndex === null}
+            variant="secondary"
           >
-            {currentQuestion + 1 === quiz.length ? "Finish Quiz" : "Next"}
-          </button>
+            {currentQuestion + 1 === total ? "Finish Quiz" : "Next"}
+          </Button>
         </>
+      ) : (
+        <section className={styles.result}>
+          <ProgressBar
+            percentage={100}
+            labelText={`Completed ${total} questions`}
+            labelPosition={"top-right"}
+          />
+          <div className={styles.actions}>
+            <Button onClick={handleRetry}>Try Again</Button>
+          </div>
+        </section>
       )}
     </div>
   );

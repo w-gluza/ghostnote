@@ -1,13 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
-}
-
-.heading {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  text-align: center;
 }
 
 .instruction {
@@ -35,47 +34,8 @@
   }
 }
 
-.submit {
-  align-self: center;
-  margin-top: 1.5rem;
-  padding: 0.6rem 1.4rem;
-  font-weight: 600;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: var(--color-black);
-  color: var(--color-white);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.submit:hover:enabled {
-  background-color: var(--color-gray-600);
-}
-
 /* Optional: result section */
 .result {
   text-align: center;
   margin-top: 2rem;
-}
-
-.result h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.result p {
-  font-size: 1.1rem;
-}
-
-.container {
-  /* max-width: 860px; */
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
 }
