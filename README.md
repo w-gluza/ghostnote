@@ -16,42 +16,34 @@ GhostNote uses predefined wave samples for drum sounds such as snare and kick, t
   [
     [36, 100],
     [42, 100]
-  ], // 1: Kick + Hi-Hat
-  [[42, 100]], // &: Hi-Hat
+  ],
+  [[42, 100]],
   [
     [38, 100],
     [42, 100]
-  ], // 2: Snare + Hi-Hat
-  [[42, 100]], // &: Hi-Hat
+  ],
+  [[42, 100]],
   [
     [36, 100],
     [42, 100]
-  ], // 3: Kick + Hi-Hat
-  [[42, 100]], // &: Hi-Hat
+  ],
+  [[42, 100]],
   [
     [38, 100],
     [42, 100]
-  ], // 4: Snare + Hi-Hat
-  [[42, 100]] // &: Hi-Hat
+  ],
+  [[42, 100]]
 ]
 ```
 
 **Readable Grid**
 
 ```
-Count:  1 & 2 & 3 & 4 &
-HH(42): x x x x x x x x
-Sn(38):     ●       ●
-KD(36): ●       ●
+Count:         1 & 2 & 3 & 4 &
+Hi-Hat(42):    x x x x x x x x
+Snare(38):         ●       ●
+Kick Dum(36):  ●       ●
 ```
-
-**Legend**
-
-- HH(42) = Closed Hi-Hat
-- Sn(38) = Acoustic Snare
-- KD(36) = Bass Drum 1
-
-`x = Hi-Hat hit, ● = Drum hit, blank = rest`
 
 ## 🌐 Live Demo
 
